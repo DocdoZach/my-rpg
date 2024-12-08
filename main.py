@@ -19,9 +19,9 @@ screen_y = 600
 screen = pygame.display.set_mode((screen_x, screen_y))
 
 # Player
-pos_x = 400
-pos_y = 300
-player = Entity(pos_x, pos_y, "media/sprites/doc.png")
+x_pos = 400
+y_pos = 300
+player = Entity(x_pos, y_pos, "media/sprites/doc.png")
 sprite_group = pygame.sprite.Group()
 sprite_group.add(player)
 
@@ -36,8 +36,14 @@ while run:
     sprite_group.draw(screen)
 
     key = pygame.key.get_pressed()
-    if key[pygame.K_w] == True:
-        pos_x += 1
+    if key[pygame.K_w]:
+        y_pos -= 1
+    if key[pygame.K_d]:
+        y_pos += 1
+    if key[pygame.K_a]:
+        x_pos -= 1
+    if key[pygame.K_s]:
+        x_pos += 1
 
     pygame.display.flip()
 
