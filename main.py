@@ -5,6 +5,7 @@ Zach N
 
 import pygame
 
+# Sprite class
 class Entity(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y, image_file):
         super().__init__()
