@@ -24,10 +24,13 @@ screen_x = 800
 screen_y = 600
 screen = pygame.display.set_mode((screen_x, screen_y))
 
+# Repeating tile background (wip)
+for i in range(0, screen_x, 16):
+    for j in range(0, screen_y, 16):
+        pygame.image.load("media/sprites/grass_tile.png")
+
 # Player
-x_pos = 400
-y_pos = 300
-player = Entity(x_pos, y_pos, "media/sprites/doc.png")
+player = Entity(400, 300, "media/sprites/doc.png")
 sprite_group = pygame.sprite.Group()
 sprite_group.add(player)
 
