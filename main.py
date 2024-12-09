@@ -9,9 +9,13 @@ import pygame
 class Entity(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y, image_file):
         super().__init__()
+        self.x = pos_x
+        self.y = pos_y
         self.image = pygame.image.load(image_file)
         self.rect = self.image.get_rect()
         self.rect.center = [pos_x, pos_y]
+    def update(self):
+        self.rect.center = [self.x, self.y]
 
 # Game window
 screen_x = 800
@@ -33,18 +37,19 @@ while run:
             run = False
 
     screen.fill((255, 255, 255))
-    sprite_group.draw(screen)
 
     key = pygame.key.get_pressed()
     if key[pygame.K_w]:
-        y_pos -= 1
-    if key[pygame.K_d]:
-        y_pos += 1
-    if key[pygame.K_a]:
-        x_pos -= 1
+        player.y -= 1
     if key[pygame.K_s]:
-        x_pos += 1
+        player.y += 1
+    if key[pygame.K_a]:
+        player.x -= 1
+    if key[pygame.K_d]:
+        player.x += 1
 
+    sprite_group.update()
+    sprite_group.draw(screen)
     pygame.display.flip()
 
 pygame.quit()
