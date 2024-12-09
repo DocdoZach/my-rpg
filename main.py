@@ -13,9 +13,11 @@ class Entity(pygame.sprite.Sprite):
         self.y = pos_y
         self.image = pygame.image.load(image_file)
         self.rect = self.image.get_rect()
+        self.image = pygame.transform.scale(self.image, [self.rect.w*4, self.rect.h*4])
         self.rect.center = [pos_x, pos_y]
     def update(self):
         self.rect.center = [self.x, self.y]
+#class Player(Entity):
 
 # Game window
 screen_x = 800
