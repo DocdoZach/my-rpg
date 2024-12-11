@@ -4,57 +4,57 @@ Zach N
 '''
 
 import pygame
+import input
+from sprite import sprites
+from sprite import Sprite
+from player import Player
+from camera import create_screen
 
-# Sprite class
-class Entity(pygame.sprite.Sprite):
-    def __init__(self, pos_x, pos_y, image_file):
-        super().__init__()
-        self.x = pos_x
-        self.y = pos_y
-        self.image = pygame.image.load(image_file)
-        self.rect = self.image.get_rect()
-        self.image = pygame.transform.scale(self.image, [self.rect.w*4, self.rect.h*4])
-        self.rect.center = [pos_x, pos_y]
-    def update(self):
-        self.rect.center = [self.x, self.y]
-#class Player(Entity):
+pygame.init()
+
+# Sprite group
+sprite_group = pygame.sprite.Group()
 
 # Game window
-screen_x = 800
-screen_y = 600
-screen = pygame.display.set_mode((screen_x, screen_y))
+screen = create_screen(800, 600, "My RPG")
 
 # Repeating tile background (wip)
-for i in range(0, screen_x, 16):
-    for j in range(0, screen_y, 16):
+screen.fill((255, 255, 255))
+for i in range(0, 800, 32):
+    for j in range(0, 600, 32):
         pygame.image.load("media/sprites/grass_tile.png")
+        tile = Sprite(i, j, "media/sprites/grass_tile.png")
 
 # Player
-player = Entity(400, 300, "media/sprites/doc.png")
-sprite_group = pygame.sprite.Group()
-sprite_group.add(player)
+player = Player(400, 300, "media/sprites/doc.png")
+
+# Clock
+clock = pygame.time.Clock()
 
 # Game loop
 run = True
+
 while run:
+
+    clock.tick(30)
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+        elif event.type == pygame.KEYDOWN:
+            input.keys_down.add(event.key)
+        elif event.type == pygame.KEYUP:
+            input.keys_down.remove(event.key)
 
-    screen.fill((255, 255, 255))
-
-    key = pygame.key.get_pressed()
-    if key[pygame.K_w]:
-        player.y -= 1
-    if key[pygame.K_s]:
-        player.y += 1
-    if key[pygame.K_a]:
-        player.x -= 1
-    if key[pygame.K_d]:
-        player.x += 1
-
+    # Update
+    player.update()
     sprite_group.update()
-    sprite_group.draw(screen)
+
+    # Draw
+    screen.fill((127, 127, 127))
+    for i in sprites:
+        i.draw(screen)
+
     pygame.display.flip()
 
 pygame.quit()
