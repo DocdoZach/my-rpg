@@ -1,6 +1,6 @@
 import pygame
 
-camera = pygame.Rect(400, 300, 0, 0)
+camera = pygame.Rect(0, 0, 0, 0)
 
 def create_screen(width, height, title):
     pygame.display.set_caption(title)

@@ -22,4 +22,4 @@ class Sprite:
     def delete(self):
         sprites.remove(self)
     def draw(self, screen):
-        screen.blit(self.image, (self.x, self.y))
+        screen.blit(self.image, (self.x - camera.x, self.y - camera.y))

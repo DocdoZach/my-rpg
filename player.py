@@ -1,6 +1,8 @@
 import pygame
+import math
 from sprite import Sprite
 from input import is_key_pressed
+from camera import camera
 
 class Player(Sprite):
     def __init__(self, x, y, image_file):
@@ -9,9 +11,29 @@ class Player(Sprite):
     def update(self):
         if is_key_pressed(pygame.K_w):
             self.y -= self.move_speed
+        """
+        elif is_key_pressed(pygame.K_w) and is_key_pressed(pygame.K_a):
+            self.y -= self.move_speed / math.sqrt(2)
+            self.x -= self.move_speed / math.sqrt(2)
+        elif is_key_pressed(pygame.K_w) and is_key_pressed(pygame.K_d):
+            self.y -= self.move_speed / math.sqrt(2)
+            self.x += self.move_speed / math.sqrt(2)
+        """
         if is_key_pressed(pygame.K_s):
             self.y += self.move_speed
+        """
+        elif is_key_pressed(pygame.K_s) and is_key_pressed(pygame.K_a):
+            self.y += self.move_speed / math.sqrt(2)
+            self.x -= self.move_speed / math.sqrt(2)
+        elif is_key_pressed(pygame.K_s) and is_key_pressed(pygame.K_d):
+            self.y += self.move_speed / math.sqrt(2)
+            self.x += self.move_speed / math.sqrt(2)
+        """
         if is_key_pressed(pygame.K_a):
             self.x -= self.move_speed
+
         if is_key_pressed(pygame.K_d):
             self.x += self.move_speed
+
+        camera.x = self.x - camera.width / 2 + self.image.get_width()/2
+        camera.y = self.y - camera.height / 2 + self.image.get_height()/2
