@@ -8,6 +8,7 @@ import input
 from sprite import sprites
 from sprite import Sprite
 from player import Player
+from tilemap import TileType, Map
 from camera import create_screen
 
 pygame.init()
@@ -16,17 +17,17 @@ pygame.init()
 sprite_group = pygame.sprite.Group()
 
 # Game window
-screen = create_screen(800, 600, "My RPG")
+screen = create_screen(800, 640, "My RPG")
 
-# Repeating tile background (wip)
-screen.fill((255, 255, 255))
-for i in range(0, 800, 32):
-    for j in range(0, 600, 32):
-        pygame.image.load("media/sprites/grass_tile.png")
-        tile = Sprite(i, j, "media/sprites/grass_tile.png")
+# Tile background
+tile_types = [
+    TileType("grass", False, "media/sprites/grass_tile.png"),
+    TileType("dirt", False, "media/sprites/dirt_tile.png")
+]
+map = Map(tile_types, 32, "maps/world.map")
 
 # Player
-player = Player(400, 300, "media/sprites/doc.png")
+player = Player(400, 320, "media/sprites/doc.png")
 
 # Clock
 clock = pygame.time.Clock()
@@ -52,6 +53,7 @@ while run:
 
     # Draw
     screen.fill((127, 127, 127))
+    map.draw(screen)
     for i in sprites:
         i.draw(screen)
 
