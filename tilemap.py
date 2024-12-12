@@ -18,7 +18,7 @@ class Map:
         for line in data.split("\n"):
             row = []
             for tile_number in line:
-                row.append(int(tile_number))
+                row.append(str(tile_number))
             self.tiles.append(row)
 
         self.tile_size = tile_size

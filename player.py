@@ -11,24 +11,10 @@ class Player(Sprite):
     def update(self):
         if is_key_pressed(pygame.K_w):
             self.y -= self.move_speed
-        """
-        elif is_key_pressed(pygame.K_w) and is_key_pressed(pygame.K_a):
-            self.y -= self.move_speed / math.sqrt(2)
-            self.x -= self.move_speed / math.sqrt(2)
-        elif is_key_pressed(pygame.K_w) and is_key_pressed(pygame.K_d):
-            self.y -= self.move_speed / math.sqrt(2)
-            self.x += self.move_speed / math.sqrt(2)
-        """
+
         if is_key_pressed(pygame.K_s):
             self.y += self.move_speed
-        """
-        elif is_key_pressed(pygame.K_s) and is_key_pressed(pygame.K_a):
-            self.y += self.move_speed / math.sqrt(2)
-            self.x -= self.move_speed / math.sqrt(2)
-        elif is_key_pressed(pygame.K_s) and is_key_pressed(pygame.K_d):
-            self.y += self.move_speed / math.sqrt(2)
-            self.x += self.move_speed / math.sqrt(2)
-        """
+
         if is_key_pressed(pygame.K_a):
             self.x -= self.move_speed
 

@@ -19,11 +19,11 @@ sprite_group = pygame.sprite.Group()
 screen = create_screen(800, 640, "My RPG")
 
 # Tile background
-tile_types = [
-    TileType("grass", False, "media/sprites/grass_tile.png"),
-    TileType("dirt", False, "media/sprites/dirt_tile.png"),
-    TileType("water", True, "media/sprites/water_tile.png")
-]
+tile_types = {
+    "d": TileType("dirt", False, "media/sprites/dirt_tile.png"),
+    " ": TileType("grass", False, "media/sprites/grass_tile.png"),
+    "w": TileType("water", True, "media/sprites/water_tile.png")
+}
 map = Map(tile_types, 32, "maps/world.map")
 
 # Sprites
@@ -32,7 +32,7 @@ Sprite(70, 460, "media/sprites/tree.png")
 Sprite(200, 320, "media/sprites/tree.png")
 Sprite(400, 500, "media/sprites/tree.png")
 Sprite(300, 80, "media/sprites/tree.png")
-Sprite(720, 160, "media/sprites/dead_tree.png")
+Sprite(720, 140, "media/sprites/dead_tree.png")
 Sprite(720, 350, "media/sprites/dead_tree.png")
 
 # Player
@@ -61,7 +61,7 @@ while run:
     sprite_group.update()
 
     # Draw
-    screen.fill((127, 127, 127))
+    screen.fill((64, 64, 64))
     map.draw(screen)
     for i in sprites:
         i.draw(screen)
