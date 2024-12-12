@@ -1,4 +1,5 @@
 import pygame
+import json
 from camera import camera
 
 class TileType:
@@ -10,21 +11,21 @@ class TileType:
 class Map:
     def __init__(self, tile_types, tile_size, map_file):
         self.tile_types = tile_types
-        file = open(map_file, "r")
-        data = file.read()
-        file.close()
-        self.tiles = []
+        with open(map_file, "r") as file:
+            data = json.load(file)["layers"][0]
 
-        for line in data.split("\n"):
-            row = []
-            for tile_number in line:
-                row.append(str(tile_number))
-            self.tiles.append(row)
+        self.width = data["width"]
+        self.height = data["height"]
+
+        self.tiles = []
+        for i, tile in enumerate(data["data"]):
+            if i % self.width == 0:
+                self.tiles.append([])
+            self.tiles[-1].append(tile_types[tile])
 
         self.tile_size = tile_size
     def draw(self, screen):
         for y, row in enumerate(self.tiles):
             for x, tile in enumerate(row):
                 location = (x * self.tile_size - camera.x, y * self.tile_size - camera.y)
-                image = self.tile_types[tile].image
-                screen.blit(image, location)
+                screen.blit(tile.image, location)

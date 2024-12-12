@@ -11,6 +11,7 @@ from tilemap import TileType, Map
 from camera import create_screen
 
 pygame.init()
+pygame.mixer.init()
 
 # Sprite group
 sprite_group = pygame.sprite.Group()
@@ -18,25 +19,27 @@ sprite_group = pygame.sprite.Group()
 # Game window
 screen = create_screen(800, 640, "My RPG")
 
+# Audio
+song = pygame.mixer.Sound("media/audio/music/hologram.mp3")
+pygame.mixer.Sound.set_volume(song, 0.5)
+#pygame.mixer.Sound.play(song)
+
 # Tile background
 tile_types = {
-    "d": TileType("dirt", False, "media/sprites/dirt_tile.png"),
-    " ": TileType("grass", False, "media/sprites/grass_tile.png"),
-    "w": TileType("water", True, "media/sprites/water_tile.png")
+    1: TileType("grass", False, "media/sprites/grass_tile.png"),
+    2: TileType("dirt", False, "media/sprites/dirt_tile.png"),
+    3: TileType("water", True, "media/sprites/water_tile.png"),
+    4: TileType("wood", False, "media/sprites/wood_tile.png")
 }
-map = Map(tile_types, 32, "maps/world.map")
+map = Map(tile_types, 32, "maps/tilemap.json")
 
 # Sprites
-Sprite(80, 60, "media/sprites/tree.png")
-Sprite(70, 460, "media/sprites/tree.png")
-Sprite(200, 320, "media/sprites/tree.png")
-Sprite(400, 500, "media/sprites/tree.png")
-Sprite(300, 80, "media/sprites/tree.png")
-Sprite(720, 140, "media/sprites/dead_tree.png")
-Sprite(720, 350, "media/sprites/dead_tree.png")
-
+Sprite(512, 740-128, "media/sprites/tree.png")
+Sprite(620, 740-128, "media/sprites/tree.png")
+Sprite(740, 780-128, "media/sprites/tree.png")
+Sprite(700, 1080-128, "media/sprites/tree.png")
 # Player
-player = Player(400, 320, "media/sprites/doc.png")
+player = Player(872, 1440, "media/sprites/doc.png")
 
 # Clock
 clock = pygame.time.Clock()
@@ -61,7 +64,7 @@ while run:
     sprite_group.update()
 
     # Draw
-    screen.fill((64, 64, 64))
+    screen.fill((16, 16, 16))
     map.draw(screen)
     for i in sprites:
         i.draw(screen)
