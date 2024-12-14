@@ -9,6 +9,8 @@ from sprite import sprites, Sprite
 from player import Player
 from tilemap import TileType, Map
 from camera import create_screen
+from entity import Entity, active_objects
+from physics import Body
 
 pygame.init()
 pygame.mixer.init()
@@ -33,13 +35,17 @@ tile_types = {
 }
 map = Map(tile_types, 32, "maps/tilemap.json")
 
-# Sprites
-Sprite(512, 740-128, "media/sprites/tree.png")
-Sprite(620, 740-128, "media/sprites/tree.png")
-Sprite(740, 780-128, "media/sprites/tree.png")
-Sprite(700, 1080-128, "media/sprites/tree.png")
+# Trees
+def make_tree(x, y):
+    Entity(Sprite("media/sprites/tree.png"), Body(0, 32, 80, 64), x=x, y=y)
+
+make_tree(512, 740-128)
+make_tree(620, 740-128)
+make_tree(740, 780-128)
+make_tree(700, 1080-128)
+
 # Player
-player = Player(872, 1440, "media/sprites/doc.png")
+player = Entity(Player(), Sprite("media/sprites/doc.png"), Body(4, 20, 40, 40), x=872, y=1440)
 
 # Clock
 clock = pygame.time.Clock()
@@ -60,7 +66,8 @@ while run:
             input.keys_down.remove(event.key)
 
     # Update
-    player.update()
+    for i in active_objects:
+        i.update()
     sprite_group.update()
 
     # Draw
