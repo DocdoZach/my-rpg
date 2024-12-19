@@ -8,10 +8,15 @@ class Body:
         bodies.append(self)
 
     def is_position_valid(self):
+        from tilemap import map
+        x = self.entity.x + self.hitbox.x
+        y = self.entity.y + self.hitbox.y
+        if map.is_rect_solid(x, y, self.hitbox.width, self.hitbox.height):
+            return False
         for body in bodies:
             if body != self and body.is_colliding_with(self):
                 return False
-            return True
+        return True
 
     def is_colliding_with(self, other):
         x = self.entity.x + self.hitbox.x

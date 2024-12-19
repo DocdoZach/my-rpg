@@ -27,17 +27,18 @@ pygame.mixer.Sound.set_volume(song, 0.5)
 #pygame.mixer.Sound.play(song)
 
 # Tile background
-tile_types = {
-    1: TileType("grass", False, "media/sprites/grass_tile.png"),
-    2: TileType("dirt", False, "media/sprites/dirt_tile.png"),
-    3: TileType("water", True, "media/sprites/water_tile.png"),
-    4: TileType("wood", False, "media/sprites/wood_tile.png")
-}
+tile_types = [
+    None,
+    TileType("grass", False, "media/sprites/grass_tile.png"),
+    TileType("dirt", False, "media/sprites/dirt_tile.png"),
+    TileType("water", True, "media/sprites/water_tile.png"),
+    TileType("wood", False, "media/sprites/wood_tile.png")
+]
 map = Map(tile_types, 32, "maps/tilemap.json")
 
 # Trees
 def make_tree(x, y):
-    Entity(Sprite("media/sprites/tree.png"), Body(0, 32, 80, 64), x=x, y=y)
+    Entity(Sprite("media/sprites/tree.png"), Body(24, 64, 36, 64), x=x, y=y)
 
 make_tree(512, 740-128)
 make_tree(620, 740-128)
@@ -45,7 +46,7 @@ make_tree(740, 780-128)
 make_tree(700, 1080-128)
 
 # Player
-player = Entity(Player(), Sprite("media/sprites/doc.png"), Body(4, 20, 40, 40), x=872, y=1440)
+player = Entity(Player(), Sprite("media/sprites/doc.png"), Body(4, 48, 48, 32), x=872, y=1440)
 
 # Clock
 clock = pygame.time.Clock()
@@ -73,6 +74,7 @@ while run:
     # Draw
     screen.fill((16, 16, 16))
     map.draw(screen)
+    sprites.sort(key=lambda sprite: sprite.entity.y+sprite.image.get_height())
     for i in sprites:
         i.draw(screen)
 
