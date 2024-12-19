@@ -1,5 +1,5 @@
 '''
-My RPG summative (name is a WIP!)
+The Hologram - An RPG made for CS class
 Zach N
 '''
 
@@ -19,7 +19,7 @@ pygame.mixer.init()
 sprite_group = pygame.sprite.Group()
 
 # Game window
-screen = create_screen(800, 640, "My RPG")
+screen = create_screen(800, 640, "THE HOLOGR△M")
 
 # Audio
 song = pygame.mixer.Sound("media/audio/music/hologram.mp3")
