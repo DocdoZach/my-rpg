@@ -32,7 +32,8 @@ tile_types = [
     TileType("grass", False, "media/sprites/grass_tile.png"),
     TileType("dirt", False, "media/sprites/dirt_tile.png"),
     TileType("water", True, "media/sprites/water_tile.png"),
-    TileType("wood", False, "media/sprites/wood_tile.png")
+    TileType("wood", False, "media/sprites/wood_tile.png"),
+    TileType("brick", True, "media/sprites/brick_tile.png")
 ]
 map = Map(tile_types, 32, "maps/tilemap.json")
 
