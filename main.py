@@ -38,7 +38,7 @@ map = Map(tile_types, 32, "maps/tilemap.json")
 
 # Trees
 def make_tree(x, y):
-    Entity(Sprite("media/sprites/tree.png"), Body(24, 64, 36, 64), x=x, y=y)
+    Entity(Sprite("media/sprites/tree.png"), Body(20, 64, 40, 64), x=x, y=y)
 
 make_tree(512, 740-128)
 make_tree(620, 740-128)
@@ -46,7 +46,7 @@ make_tree(740, 780-128)
 make_tree(700, 1080-128)
 
 # Player
-player = Entity(Player(), Sprite("media/sprites/doc.png"), Body(4, 48, 48, 32), x=872, y=1440)
+player = Entity(Player(), Sprite("media/sprites/doc.png"), Body(8, 48, 28, 28), x=872, y=1440)
 
 # Clock
 clock = pygame.time.Clock()

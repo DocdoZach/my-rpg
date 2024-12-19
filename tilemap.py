@@ -36,20 +36,20 @@ class Map:
         y_tile = int(y / self.tile_size)
         if x_tile < 0 or \
             y_tile < 0 or \
-            x_tile >= len(self.tiles[y_tile]) or \
+            x_tile >= len(self.tiles[0]) or \
             y_tile >= len(self.tiles):
             return False
         tile = self.tiles[y_tile][x_tile]
-        return self.tile_types[tile].has_collision
+        return tile.has_collision
 
-    def is_rect_solid(self, x, y, width, height):
-        x_checks = int(ceil(width/self.tile_size))
+    def is_tile_solid(self, x, y, width, height):
+        x_checks = int(ceil(width / self.tile_size))
         y_checks = int(ceil(height / self.tile_size))
         for iy in range(y_checks):
             for ix in range(x_checks):
-                x = ix * self.tile_size + x
-                y = iy * self.tile_size + y
-                if self.is_point_solid(x, y):
+                _x = ix * self.tile_size + x
+                _y = iy * self.tile_size + y
+                if self.is_point_solid(_x, _y):
                     return True
         if self.is_point_solid(x + width, y):
             return True
