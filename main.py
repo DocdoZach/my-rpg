@@ -49,16 +49,17 @@ make_tree(700, 1080-128)
 # Player
 player = Entity(Player(), Sprite("media/sprites/doc.png"), Body(8, 48, 28, 28), x=872, y=1440)
 
-# Clock
+# Game clock
 clock = pygame.time.Clock()
 
 # Game loop
 run = True
-
 while run:
 
+    # Game clock frequency (30Hz)
     clock.tick(30)
 
+    # Event handler (quit game, keys pressed)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
@@ -67,18 +68,17 @@ while run:
         elif event.type == pygame.KEYUP:
             input.keys_down.remove(event.key)
 
-    # Update
+    # Update objects/sprites
     for i in active_objects:
         i.update()
     sprite_group.update()
 
-    # Draw
+    # Draw sprites
     screen.fill((16, 16, 16))
     map.draw(screen)
     sprites.sort(key=lambda sprite: sprite.entity.y+sprite.image.get_height())
     for i in sprites:
         i.draw(screen)
-
     pygame.display.flip()
 
 pygame.quit()

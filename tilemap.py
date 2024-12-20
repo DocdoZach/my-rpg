@@ -3,7 +3,7 @@ import json
 from camera import camera
 from math import ceil
 
-map = None
+worldmap = None
 
 class TileType:
     def __init__(self, name, has_collision, image_file):
@@ -13,9 +13,9 @@ class TileType:
 
 class Map:
     def __init__(self, tile_types, tile_size, map_file):
-        global map
+        global worldmap
         self.tile_types = tile_types
-        map = self
+        worldmap = self
 
         with open(map_file, "r") as file:
             data = json.load(file)["layers"][0]
