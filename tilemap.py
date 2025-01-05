@@ -1,3 +1,5 @@
+# This file contains the TileType and Map classes. TileType is used to specify different types of tiles used in the map, while Map is used to form the map itself.
+
 import pygame
 import json
 from camera import camera

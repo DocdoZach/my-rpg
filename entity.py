@@ -1,3 +1,5 @@
+# This file contains the Entity class. It is used for the player, enemies, and other objects found in-game like trees.
+
 active_objects = []
 
 class Entity:

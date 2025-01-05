@@ -1,3 +1,5 @@
+# This file contains the code to create a game screen, and provides code used to set the player's camera.
+
 import pygame
 
 camera = pygame.Rect(0, 0, 0, 0)

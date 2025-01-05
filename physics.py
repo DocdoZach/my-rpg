@@ -1,3 +1,5 @@
+# This file contains the Body class. It is used for any entity with collision. It allows the bounding box of an entity to be set.
+
 from pygame import Rect
 
 bodies = []

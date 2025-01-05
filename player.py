@@ -1,6 +1,6 @@
-import pygame
-from pygame import KMOD_CTRL
+# This file contains the Player class. It is used as a component to an Entity object representing the player character. Movement, body and camera are set here.
 
+import pygame
 from sprite import Sprite
 from input import is_key_pressed
 from camera import camera
@@ -9,15 +9,27 @@ from physics import Body
 import tilemap
 
 class Player:
-    def __init__(self):
+    def __init__(self, level, inventory):
         active_objects.append(self)
         self.move_speed = 8
+        self.level = level
+        self.inventory = inventory
+        self.hp = 10 + self.level * 5
 
     def update(self):
         previous_x = self.entity.x
         previous_y = self.entity.y
         sprite = self.entity.get(Sprite)
         body = self.entity.get(Body)
+
+        # Toggle inventory
+        if is_key_pressed(pygame.K_e):
+            print("Inventory:")
+            for item in self.inventory:
+                print(item[0])
+
+        # Player's stats
+        self.hp = 10 + self.level * 5
 
         # Player's movement
         if is_key_pressed(pygame.K_LCTRL):

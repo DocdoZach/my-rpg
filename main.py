@@ -5,6 +5,7 @@ Zach N
 
 import pygame
 import input
+from items import *
 from sprite import sprites, Sprite
 from player import Player
 from tilemap import TileType, Map
@@ -47,7 +48,7 @@ make_tree(740, 780-128)
 make_tree(700, 1080-128)
 
 # Player
-player = Entity(Player(), Sprite("media/sprites/doc.png"), Body(8, 48, 28, 28), x=872, y=1440)
+player = Entity(Player(1, [sword, potion]), Sprite("media/sprites/doc.png"), Body(8, 48, 28, 28), x=872, y=1440)
 
 # Game clock
 clock = pygame.time.Clock()

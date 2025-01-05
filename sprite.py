@@ -1,3 +1,5 @@
+# This file contains the Sprite class, used to give entities sprites visible in the game window.
+
 import pygame
 from camera import camera
 
