@@ -2,7 +2,7 @@
 
 import pygame
 from sprite import Sprite
-from input import is_key_pressed
+from keyinput import is_key_pressed
 from camera import camera
 from entity import active_objects
 from physics import Body

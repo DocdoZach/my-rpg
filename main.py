@@ -4,7 +4,7 @@ Zach N
 '''
 
 import pygame
-import input
+import keyinput
 from items import *
 from sprite import sprites, Sprite
 from player import Player
@@ -65,9 +65,9 @@ while run:
         if event.type == pygame.QUIT:
             run = False
         elif event.type == pygame.KEYDOWN:
-            input.keys_down.add(event.key)
+            keyinput.keys_down.add(event.key)
         elif event.type == pygame.KEYUP:
-            input.keys_down.remove(event.key)
+            keyinput.keys_down.remove(event.key)
 
     # Update objects/sprites
     for i in active_objects:
