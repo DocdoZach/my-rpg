@@ -22,3 +22,7 @@ class Sprite:
         sprites.remove(self)
     def draw(self, screen):
         screen.blit(self.image, (self.entity.x - camera.x, self.entity.y - camera.y))
+
+class Multisprite:
+    def __init__(self, sprite1, sprite2=None, sprite3=None, sprite4=None):
+
