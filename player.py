@@ -1,6 +1,7 @@
 # This file contains the Player class. It is used as a component to an Entity object representing the player character. Movement, body and camera are set here.
 
 import pygame
+from items import *
 from sprite import Sprite
 from keyinput import is_key_pressed
 from camera import camera
@@ -65,6 +66,23 @@ class Player:
         camera.x = target_camera_x
         camera.y = target_camera_y
 
+    def use_item(self, item):
+        if item == sword:
+            print("You can only use this in battle!")
+            return
+        elif item == potion:
+            if self.current_hp == self.max_hp:
+                print(f"Your HP is already full ({self.current_hp}/{self.max_hp} HP)!")
+                return
+            elif self.current_hp + 15 > self.max_hp:
+                self.current_hp = self.max_hp
+                print(f"You are fully healed ({self.current_hp}/{self.max_hp} HP).")
+                return
+            else:
+                self.current_hp += 15
+                print(f"Your HP is now {self.current_hp}/{self.max_hp}.")
+                return
+
     def open_inventory(self):
         print("\n\n\n\n\n\n\n\n----------\nDoc's Inventory:")
         for (i, item) in enumerate(self.inventory):
@@ -80,7 +98,7 @@ class Player:
                 continue
             else:
                 break
-        self.inventory[selection-1][1] -= 1
+        self.use_item(self.inventory[selection-1][0])
 
     def open_stats(self):
         print("\n\n\n\n\n\n\n\n----------\nDoc's Stats:")

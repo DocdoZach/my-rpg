@@ -31,12 +31,12 @@ pygame.mixer.Sound.set_volume(song, 0.5)
 # Tile background
 tile_types = [
     None,
-    TileType("grass", False, "media/sprites/grass_tile.png"),
-    TileType("dirt", False, "media/sprites/dirt_tile.png"),
-    TileType("water", True, "media/sprites/water_tile.png"),
-    TileType("wood", False, "media/sprites/wood_tile.png"),
-    TileType("brick", True, "media/sprites/brick_tile.png"),
-    TileType("dark_grass", False, "media/sprites/dark_grass_tile.png")
+    TileType("grass", False, "media/sprites/tiles/grass_tile.png"),
+    TileType("dirt", False, "media/sprites/tiles/dirt_tile.png"),
+    TileType("water", True, "media/sprites/tiles/water_tile.png"),
+    TileType("wood", False, "media/sprites/tiles/wood_tile.png"),
+    TileType("brick", True, "media/sprites/tiles/brick_tile.png"),
+    TileType("dark_grass", False, "media/sprites/tiles/dark_grass_tile.png")
 ]
 map = Map(tile_types, 32, "maps/tilemap.json")
 
