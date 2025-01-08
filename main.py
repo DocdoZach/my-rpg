@@ -50,7 +50,7 @@ make_tree(760, 776-128)
 make_tree(700, 1040-128)
 
 # Player
-player = Entity(Player(1, [sword, potion]), Sprite("media/sprites/player/doc.png"), Body(8, 48, 28, 28), x=872, y=1440)
+doc = Entity(Player(1, [[sword, 1], [potion, 2]]), Sprite("media/sprites/player/doc.png"), Body(8, 48, 28, 28), x=872, y=1440)
 
 # Game clock
 clock = pygame.time.Clock()
@@ -59,8 +59,8 @@ clock = pygame.time.Clock()
 run = True
 while run:
 
-    # Game clock frequency (30Hz)
-    clock.tick(30)
+    # Game clock frequency (60Hz)
+    clock.tick(60)
 
     # Event handler (quit game, keys pressed)
     for event in pygame.event.get():
@@ -68,6 +68,33 @@ while run:
             run = False
         elif event.type == pygame.KEYDOWN:
             keyinput.keys_down.add(event.key)
+
+            # Open inventory
+            if event.key == pygame.K_z:
+                doc.get(Player).open_inventory()
+
+            # Open stats
+            if event.key == pygame.K_x:
+                doc.get(Player).open_stats()
+
+            # Debug testing:
+
+            # Level up
+            if event.key == pygame.K_RIGHTBRACKET:
+                doc.get(Player).level += 1
+                print(f"Levelled up to level {doc.get(Player).level}")
+
+            # Level down
+            if event.key == pygame.K_LEFTBRACKET:
+                if doc.get(Player).level != 1:
+                    doc.get(Player).level -= 1
+                    print(f"Levelled down to level {doc.get(Player).level}")
+
+            # Lose 3 HP
+            if event.key == pygame.K_p:
+                doc.get(Player).current_hp -= 3
+                print("Lost 3 HP")
+
         elif event.type == pygame.KEYUP:
             keyinput.keys_down.remove(event.key)
 

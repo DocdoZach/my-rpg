@@ -14,7 +14,8 @@ class Player:
         self.move_speed = 8
         self.level = level
         self.inventory = inventory
-        self.hp = 10 + self.level * 5
+        self.max_hp = 10 + self.level * 5
+        self.current_hp = self.max_hp
 
     def update(self):
         previous_x = self.entity.x
@@ -22,20 +23,14 @@ class Player:
         sprite = self.entity.get(Sprite)
         body = self.entity.get(Body)
 
-        # Toggle inventory
-        if is_key_pressed(pygame.K_e):
-            print("Inventory:")
-            for item in self.inventory:
-                print(item[0])
-
         # Player's stats
-        self.hp = 10 + self.level * 5
+        self.max_hp = 10 + self.level * 5
 
         # Player's movement
         if is_key_pressed(pygame.K_LCTRL):
-            self.move_speed = 12
+            self.move_speed = 6
         else:
-            self.move_speed = 8
+            self.move_speed = 4
 
         if is_key_pressed(pygame.K_w):
             self.entity.y -= self.move_speed
@@ -69,3 +64,25 @@ class Player:
 
         camera.x = target_camera_x
         camera.y = target_camera_y
+
+    def open_inventory(self):
+        print("\n\n\n\n\n\n\n\n----------\nDoc's Inventory:")
+        for (i, item) in enumerate(self.inventory):
+            print(f"{i+1}. {item[0][0]} x{item[1]}")
+        print("----------")
+        try:
+            selection = int(input("Select the number of the item to use: "))
+        except ValueError:
+            selection = int(input("Invalid option. Select the number of the item to use: "))
+        while True:
+            if selection < 0 or selection > len(self.inventory):
+                selection = int(input("Invalid option. Select the number of the item to use: "))
+                continue
+            else:
+                break
+        self.inventory[selection-1][1] -= 1
+
+    def open_stats(self):
+        print("\n\n\n\n\n\n\n\n----------\nDoc's Stats:")
+        print(f"Level {self.level}\n{self.current_hp}/{self.max_hp} HP")
+        print("----------")
