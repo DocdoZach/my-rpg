@@ -41,17 +41,21 @@ tile_types = [
 map = Map(tile_types, 32, "maps/tilemap.json")
 
 # Trees
-def make_tree(x, y):
-    Entity(Sprite("media/sprites/tree.png"), Body(44, 96, 40, 64), x=x, y=y)
+def make_sprite(kind, x, y):
+    if kind == "tree":
+        Entity(Sprite("media/sprites/tree.png"), Body(40, 96, 44, 64), x=x, y=y)
+    if kind == "house":
+        Entity(Sprite("media/sprites/house.png"), Body(28, 92, 164, 132), x=x, y=y)
 
-make_tree(716, 916)
-make_tree(784, 660)
-make_tree(616, 604)
-make_tree(700, 584)
-make_tree(576, 860)
+make_sprite("tree", 716, 916)
+make_sprite("tree", 784, 660)
+make_sprite("tree", 616, 604)
+make_sprite("tree", 700, 584)
+make_sprite("tree", 576, 860)
+make_sprite("house", 976, 704)
 
 # Player
-doc = Entity(Player(1, [[sword, 1], [potion, 2]]), Sprite("media/sprites/player/doc.png"), Body(8, 48, 28, 28), x=872, y=1440)
+doc = Entity(Player(1, [[sword, 1], [potion, 2]]), Sprite("media/sprites/player/doc.png"), Body(8, 72, 28, 4), x=872, y=1440)
 previous_key = ""
 
 # Game clock

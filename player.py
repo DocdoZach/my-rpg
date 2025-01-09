@@ -29,7 +29,7 @@ class Player:
 
         # Player's movement
         if is_key_pressed(pygame.K_LCTRL):
-            self.move_speed = 6
+            self.move_speed = 8
         else:
             self.move_speed = 4
 
