@@ -4,12 +4,12 @@ Zach N
 '''
 
 import pygame
+from sprite import loaded_images
 import keyinput
 from items import *
-from keyinput import is_key_pressed
 from sprite import sprites, Sprite
 from player import Player
-from tilemap import TileType, Map
+from tilemap import *
 from camera import create_screen
 from entity import Entity, active_objects
 from physics import Body
@@ -44,13 +44,15 @@ map = Map(tile_types, 32, "maps/tilemap.json")
 def make_tree(x, y):
     Entity(Sprite("media/sprites/tree.png"), Body(44, 96, 40, 64), x=x, y=y)
 
-make_tree(480, 736-128)
-make_tree(620, 736-128)
-make_tree(760, 776-128)
-make_tree(700, 1040-128)
+make_tree(716, 916)
+make_tree(784, 660)
+make_tree(616, 604)
+make_tree(700, 584)
+make_tree(576, 860)
 
 # Player
 doc = Entity(Player(1, [[sword, 1], [potion, 2]]), Sprite("media/sprites/player/doc.png"), Body(8, 48, 28, 28), x=872, y=1440)
+previous_key = ""
 
 # Game clock
 clock = pygame.time.Clock()
@@ -76,6 +78,26 @@ while run:
             # Open stats
             if event.key == pygame.K_x:
                 doc.get(Player).open_stats()
+
+            # Walk up sprite
+            if event.key == pygame.K_w:
+                doc.get(Sprite).reload("media/sprites/player/doc_back.png")
+                previous_key = "w"
+
+            # Walk down sprite
+            if event.key == pygame.K_s:
+                doc.get(Sprite).reload("media/sprites/player/doc.png")
+                previous_key = "s"
+
+            # Walk down sprite
+            if event.key == pygame.K_a:
+                doc.get(Sprite).reload("media/sprites/player/doc_left.png")
+                previous_key = "a"
+
+            # Walk right sprite
+            if event.key == pygame.K_d:
+                doc.get(Sprite).reload("media/sprites/player/doc_right.png")
+                previous_key = "d"
 
             # Debug testing:
 

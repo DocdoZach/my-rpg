@@ -33,19 +33,19 @@ class Player:
         else:
             self.move_speed = 4
 
-        if is_key_pressed(pygame.K_w):
+        if is_key_pressed(pygame.K_w) or is_key_pressed(pygame.K_UP):
             self.entity.y -= self.move_speed
 
-        if is_key_pressed(pygame.K_s):
+        if is_key_pressed(pygame.K_s) or is_key_pressed(pygame.K_DOWN):
             self.entity.y += self.move_speed
 
         if not body.is_position_valid():
             self.entity.y = previous_y
 
-        if is_key_pressed(pygame.K_a):
+        if is_key_pressed(pygame.K_a) or is_key_pressed(pygame.K_LEFT):
             self.entity.x -= self.move_speed
 
-        if is_key_pressed(pygame.K_d):
+        if is_key_pressed(pygame.K_d) or is_key_pressed(pygame.K_RIGHT):
             self.entity.x += self.move_speed
 
         if not body.is_position_valid():
