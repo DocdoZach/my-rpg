@@ -10,7 +10,7 @@ class Body:
         bodies.append(self)
 
     def is_position_valid(self):
-        from tilemap import worldmap
+        from main import worldmap
         x = self.entity.x + self.hitbox.x
         y = self.entity.y + self.hitbox.y
         if worldmap.is_tile_solid(x, y, self.hitbox.width, self.hitbox.height):

@@ -6,7 +6,8 @@ Zach N
 import pygame
 from sprite import loaded_images
 import keyinput
-from items import *
+from itemlist import *
+from maplist import *
 from sprite import sprites, Sprite
 from player import Player
 from tilemap import *
@@ -29,33 +30,31 @@ pygame.mixer.Sound.set_volume(song, 0.5)
 #pygame.mixer.Sound.play(song)
 
 # Tile background
-tile_types = [
-    None,
-    TileType("grass", False, "media/sprites/tiles/grass_tile.png"),
-    TileType("dirt", False, "media/sprites/tiles/dirt_tile.png"),
-    TileType("water", True, "media/sprites/tiles/water_tile.png"),
-    TileType("wood", False, "media/sprites/tiles/wood_tile.png"),
-    TileType("brick", True, "media/sprites/tiles/brick_tile.png"),
-    TileType("dark_grass", False, "media/sprites/tiles/dark_grass_tile.png")
-]
-map = Map(tile_types, 32, "maps/tilemap.json")
+worldmap = river_map
 
 # Trees
 def make_sprite(kind, x, y):
     if kind == "tree":
-        Entity(Sprite("media/sprites/tree.png"), Body(40, 96, 44, 64), x=x, y=y)
+        return Entity(Sprite("media/sprites/tree.png"), Body(40, 96, 44, 64), x=x, y=y)
     if kind == "house":
-        Entity(Sprite("media/sprites/house.png"), Body(28, 92, 164, 132), x=x, y=y)
+        return Entity(Sprite("media/sprites/house.png"), Body(28, 92, 164, 132), x=x, y=y)
+    if kind == "well":
+        return Entity(Sprite("media/sprites/well.png"), Body(28, 92, 164, 132), x=x, y=y)
 
+make_sprite("tree", 364, 616)
+make_sprite("tree", 480, 848)
+make_sprite("tree", 300, 1112)
 make_sprite("tree", 716, 916)
-make_sprite("tree", 784, 660)
-make_sprite("tree", 616, 604)
-make_sprite("tree", 700, 584)
-make_sprite("tree", 576, 860)
-make_sprite("house", 976, 704)
+make_sprite("tree", 232, 440)
+make_sprite("tree", 1180, 816)
+make_sprite("tree", 636, 512)
+make_sprite("tree", 892, 376)
+house1 = make_sprite("house", 1008, 704)
+house2 = make_sprite("house", 272, 288)
+make_sprite("well", 784, 432)
 
 # Player
-doc = Entity(Player(1, [[sword, 1], [potion, 2]]), Sprite("media/sprites/player/doc.png"), Body(8, 72, 28, 4), x=872, y=1440)
+doc = Entity(Player(1, [[sword, 1], [potion, 2]]), Sprite("media/sprites/player/doc.png"), Body(8, 72, 28, 4), x=872, y=1316)
 previous_key = ""
 
 # Game clock
@@ -84,26 +83,30 @@ while run:
                 doc.get(Player).open_stats()
 
             # Walk up sprite
-            if event.key == pygame.K_w:
+            if event.key == pygame.K_w or event.key == pygame.K_UP:
                 doc.get(Sprite).reload("media/sprites/player/doc_back.png")
                 previous_key = "w"
 
             # Walk down sprite
-            if event.key == pygame.K_s:
+            if event.key == pygame.K_s or event.key == pygame.K_DOWN:
                 doc.get(Sprite).reload("media/sprites/player/doc.png")
                 previous_key = "s"
 
             # Walk down sprite
-            if event.key == pygame.K_a:
+            if event.key == pygame.K_a or event.key == pygame.K_LEFT:
                 doc.get(Sprite).reload("media/sprites/player/doc_left.png")
                 previous_key = "a"
 
             # Walk right sprite
-            if event.key == pygame.K_d:
+            if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
                 doc.get(Sprite).reload("media/sprites/player/doc_right.png")
                 previous_key = "d"
 
             # Debug testing:
+
+            # Print Doc's coordinates
+            if event.key == pygame.K_e:
+                print(f"x, y: {doc.x}, {doc.y}")
 
             # Level up
             if event.key == pygame.K_RIGHTBRACKET:
@@ -129,9 +132,16 @@ while run:
         i.update()
     sprite_group.update()
 
+    # Enter house 1
+    if worldmap == river_map and doc.x == 1096 and doc.y == 860:
+        print("Doc enters house 1")
+        worldmap = house_map
+        doc.x = 352
+        doc.y = 528
+
     # Draw sprites
     screen.fill((16, 16, 16))
-    map.draw(screen)
+    worldmap.draw(screen)
     sprites.sort(key=lambda sprite: sprite.entity.y+sprite.image.get_height())
     for i in sprites:
         i.draw(screen)

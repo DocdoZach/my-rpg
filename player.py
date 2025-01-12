@@ -1,13 +1,13 @@
 # This file contains the Player class. It is used as a component to an Entity object representing the player character. Movement, body and camera are set here.
 
 import pygame
-from items import *
+from itemlist import *
 from sprite import Sprite
 from keyinput import is_key_pressed
 from camera import camera
 from entity import active_objects
 from physics import Body
-import tilemap
+import maplist
 
 class Player:
     def __init__(self, level, inventory):
@@ -56,12 +56,12 @@ class Player:
 
         if target_camera_x < 0:
             target_camera_x = 0
-        elif target_camera_x > tilemap.worldmap.width * tilemap.worldmap.tile_size - camera.width:
-            target_camera_x = tilemap.worldmap.width * tilemap.worldmap.tile_size - camera.width
+        elif target_camera_x > maplist.worldmap.width * maplist.worldmap.tile_size - camera.width:
+            target_camera_x = maplist.worldmap.width * maplist.worldmap.tile_size - camera.width
         if target_camera_y < 0:
             target_camera_y = 0
-        elif target_camera_y > tilemap.worldmap.height * tilemap.worldmap.tile_size - camera.height:
-            target_camera_y = tilemap.worldmap.height * tilemap.worldmap.tile_size - camera.height
+        elif target_camera_y > maplist.worldmap.height * maplist.worldmap.tile_size - camera.height:
+            target_camera_y = maplist.worldmap.height * maplist.worldmap.tile_size - camera.height
 
         camera.x = target_camera_x
         camera.y = target_camera_y
