@@ -24,6 +24,37 @@ sprite_group = pygame.sprite.Group()
 # Game window
 screen = create_screen(800, 640, "THE HOLOGR△M")
 
+# Map exit checks
+def map_exits():
+
+    # ID 1 -> 2
+    if maplist.worldmap == maplist.beach_map and doc.x in range(500, 604, 4) and doc.y == 0:
+        print("Beach -> River")
+        maplist.switch_map(maplist.river_map)
+        doc.x = 1192
+        doc.y = 1512
+
+    # ID 2 -> 1
+    if maplist.worldmap == maplist.river_map and doc.x in range(1140, 1244, 4) and doc.y == 1520:
+        print("River -> Beach")
+        maplist.switch_map(maplist.beach_map)
+        doc.x = 552
+        doc.y = 8
+
+    # Enter house SE
+    if maplist.worldmap == maplist.river_map and doc.x in range(1084, 1108, 4) and doc.y == 856:
+        print("River -> House")
+        maplist.switch_map(maplist.house_map)
+        doc.x = 376
+        doc.y = 528
+
+    # Exit house SE
+    if maplist.worldmap == maplist.house_map and doc.x in range(344, 408, 4) and doc.y == 560:
+        print("House -> River")
+        maplist.switch_map(maplist.river_map)
+        doc.x = 1096
+        doc.y = 864
+
 # Audio
 song = pygame.mixer.Sound("media/audio/music/hologram.mp3")
 pygame.mixer.Sound.set_volume(song, 0.5)
@@ -90,13 +121,13 @@ while run:
             # Level up
             if event.key == pygame.K_RIGHTBRACKET:
                 doc.get(Player).level += 1
-                print(f"Levelled up to level {doc.get(Player).level}")
+                print(f"Leveled up to level {doc.get(Player).level}")
 
             # Level down
             if event.key == pygame.K_LEFTBRACKET:
                 if doc.get(Player).level != 1:
                     doc.get(Player).level -= 1
-                    print(f"Levelled down to level {doc.get(Player).level}")
+                    print(f"Leveled down to level {doc.get(Player).level}")
 
             # Lose 3 HP
             if event.key == pygame.K_p:
@@ -111,19 +142,8 @@ while run:
         i.update()
     sprite_group.update()
 
-    # Enter house 1
-    if maplist.worldmap == maplist.river_map and doc.x in range(1084, 1108, 4) and doc.y == 856:
-        print("Doc enters house 1")
-        maplist.switch_map(maplist.house_map)
-        doc.x = 376
-        doc.y = 528
-
-    # Exit house 1
-    if maplist.worldmap == maplist.house_map and doc.x in range(344, 408, 4) and doc.y == 560:
-        print("Doc exits house 1")
-        maplist.switch_map(maplist.river_map)
-        doc.x = 1096
-        doc.y = 864
+    # Check for map exits
+    map_exits()
 
     # Draw sprites
     screen.fill((16, 16, 16))

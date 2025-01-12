@@ -26,7 +26,9 @@ river_map_tiles = [
     TileType("water", True, "media/sprites/tiles/water_tile.png"),
     TileType("wood", False, "media/sprites/tiles/wood_tile.png"),
     TileType("brick", True, "media/sprites/tiles/brick_tile.png"),
-    TileType("dark_grass", False, "media/sprites/tiles/dark_grass_tile.png")
+    TileType("dark_grass", False, "media/sprites/tiles/dark_grass_tile.png"),
+    TileType("black", True, "media/sprites/tiles/black_tile.png"),
+    TileType("sand", False, "media/sprites/tiles/sand_tile.png")
 ]
 house_map_tiles = [
     None,
@@ -44,13 +46,20 @@ map_sprite("tree", 232, 440),
 map_sprite("tree", 1180, 816),
 map_sprite("tree", 636, 512),
 map_sprite("tree", 892, 376),
+map_sprite("tree", 24, 144),
+map_sprite("tree", 1356, 1060),
 map_sprite("house", 1008, 704),
 map_sprite("house", 272, 288),
+map_sprite("house", 464, 48),
+map_sprite("house", 1328, 304),
 map_sprite("well", 784, 432)
 ]
 river_map = Map(river_map_tiles, 32, "maps/river_map.json", river_map_entities)
 
 house_map_entities = []
 house_map = Map(house_map_tiles, 32, "maps/house_map.json", house_map_entities)
+
+beach_map_entities = []
+beach_map = Map(river_map_tiles, 32, "maps/beach_map.json", beach_map_entities)
 
 worldmap = river_map
