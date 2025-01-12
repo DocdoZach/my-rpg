@@ -37,6 +37,10 @@ house_map_tiles = [
     TileType("brick", True, "media/sprites/tiles/brick_tile.png")
 ]
 
+
+beach_map_entities = []
+beach_map = Map(river_map_tiles, 32, "maps/beach_map.json", beach_map_entities)
+
 river_map_entities = [
 map_sprite("tree", 364, 616),
 map_sprite("tree", 480, 848),
@@ -59,7 +63,7 @@ river_map = Map(river_map_tiles, 32, "maps/river_map.json", river_map_entities)
 house_map_entities = []
 house_map = Map(house_map_tiles, 32, "maps/house_map.json", house_map_entities)
 
-beach_map_entities = []
-beach_map = Map(river_map_tiles, 32, "maps/beach_map.json", beach_map_entities)
-
-worldmap = river_map
+maps = [beach_map, river_map, house_map]
+worldmap = beach_map
+for i in maps:
+    i.toggle_map(beach_map)

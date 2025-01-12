@@ -60,11 +60,8 @@ song = pygame.mixer.Sound("media/audio/music/hologram.mp3")
 pygame.mixer.Sound.set_volume(song, 0.5)
 #pygame.mixer.Sound.play(song)
 
-# Tile background
-maplist.worldmap = maplist.river_map
-
 # Player
-doc = Entity(Player(1, [[sword, 1], [potion, 2]]), Sprite("media/sprites/player/doc.png"), Body(8, 72, 28, 4), x=872, y=1316)
+doc = Entity(Player(1, [[sword, 1], [potion, 2]]), Sprite("media/sprites/player/doc.png"), Body(8, 72, 28, 4), x=480, y=768)
 previous_key = ""
 
 # Game clock
