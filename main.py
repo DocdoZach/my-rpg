@@ -7,7 +7,7 @@ import pygame
 from sprite import loaded_images
 import keyinput
 from itemlist import *
-from maplist import *
+import maplist
 from sprite import sprites, Sprite
 from player import Player
 from tilemap import *
@@ -30,28 +30,7 @@ pygame.mixer.Sound.set_volume(song, 0.5)
 #pygame.mixer.Sound.play(song)
 
 # Tile background
-worldmap = river_map
-
-# Trees
-def make_sprite(kind, x, y):
-    if kind == "tree":
-        return Entity(Sprite("media/sprites/tree.png"), Body(40, 96, 44, 64), x=x, y=y)
-    if kind == "house":
-        return Entity(Sprite("media/sprites/house.png"), Body(28, 92, 164, 132), x=x, y=y)
-    if kind == "well":
-        return Entity(Sprite("media/sprites/well.png"), Body(28, 92, 164, 132), x=x, y=y)
-
-make_sprite("tree", 364, 616)
-make_sprite("tree", 480, 848)
-make_sprite("tree", 300, 1112)
-make_sprite("tree", 716, 916)
-make_sprite("tree", 232, 440)
-make_sprite("tree", 1180, 816)
-make_sprite("tree", 636, 512)
-make_sprite("tree", 892, 376)
-house1 = make_sprite("house", 1008, 704)
-house2 = make_sprite("house", 272, 288)
-make_sprite("well", 784, 432)
+maplist.worldmap = maplist.river_map
 
 # Player
 doc = Entity(Player(1, [[sword, 1], [potion, 2]]), Sprite("media/sprites/player/doc.png"), Body(8, 72, 28, 4), x=872, y=1316)
@@ -133,15 +112,22 @@ while run:
     sprite_group.update()
 
     # Enter house 1
-    if worldmap == river_map and doc.x == 1096 and doc.y == 860:
+    if maplist.worldmap == maplist.river_map and doc.x in range(1084, 1108, 4) and doc.y == 856:
         print("Doc enters house 1")
-        worldmap = house_map
-        doc.x = 352
+        maplist.switch_map(maplist.house_map)
+        doc.x = 376
         doc.y = 528
+
+    # Exit house 1
+    if maplist.worldmap == maplist.house_map and doc.x in range(344, 408, 4) and doc.y == 560:
+        print("Doc exits house 1")
+        maplist.switch_map(maplist.river_map)
+        doc.x = 1096
+        doc.y = 864
 
     # Draw sprites
     screen.fill((16, 16, 16))
-    worldmap.draw(screen)
+    maplist.worldmap.draw(screen)
     sprites.sort(key=lambda sprite: sprite.entity.y+sprite.image.get_height())
     for i in sprites:
         i.draw(screen)

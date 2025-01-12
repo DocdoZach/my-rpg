@@ -2,6 +2,10 @@
 
 import pygame
 import json
+
+import physics
+from sprite import *
+from physics import Body
 from camera import camera
 from math import ceil
 
@@ -12,8 +16,9 @@ class TileType:
         self.has_collision = has_collision
 
 class Map:
-    def __init__(self, tile_types, tile_size, map_file):
+    def __init__(self, tile_types, tile_size, map_file, entities):
         self.tile_types = tile_types
+        self.entities = entities
 
         with open(map_file, "r") as file:
             data = json.load(file)["layers"][0]
@@ -62,3 +67,11 @@ class Map:
             for x, tile in enumerate(row):
                 location = (x * self.tile_size - camera.x, y * self.tile_size - camera.y)
                 screen.blit(tile.image, location)
+
+    def toggle_map(self, new_map):
+        for entity in self.entities:
+            entity.get(Sprite).show = False
+            physics.bodies.remove(entity.get(Body))
+        for entity in new_map.entities:
+            entity.get(Sprite).show = True
+            physics.bodies.append(entity.get(Body))

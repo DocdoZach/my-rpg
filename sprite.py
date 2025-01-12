@@ -8,6 +8,7 @@ loaded_images = {}
 
 class Sprite:
     def __init__(self, image_file):
+        self.show = True
         if image_file in loaded_images:
             self.image = loaded_images[image_file]
         else:
@@ -30,7 +31,8 @@ class Sprite:
     def delete(self):
         sprites.remove(self)
     def draw(self, screen):
-        screen.blit(self.image, (self.entity.x - camera.x, self.entity.y - camera.y))
+        if self.show:
+            screen.blit(self.image, (self.entity.x - camera.x, self.entity.y - camera.y))
 
 class AnimatedSprite:
     def __init__(self):
