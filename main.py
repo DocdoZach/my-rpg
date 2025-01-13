@@ -42,18 +42,32 @@ def map_exits():
         doc.y = 8
 
     # Enter house SE
-    if maplist.worldmap == maplist.river_map and doc.x in range(1084, 1108, 4) and doc.y == 856:
-        print("River -> House")
-        maplist.switch_map(maplist.house_map)
+    if maplist.worldmap == maplist.river_map and doc.x in range(1084, 1108+1, 4) and doc.y == 856:
+        print("River -> House SE")
+        maplist.switch_map(maplist.houseSE_map)
         doc.x = 376
         doc.y = 528
 
     # Exit house SE
-    if maplist.worldmap == maplist.house_map and doc.x in range(344, 408, 4) and doc.y == 560:
-        print("House -> River")
+    if maplist.worldmap == maplist.houseSE_map and doc.x in range(344, 408+1, 4) and doc.y == 560:
+        print("House SE -> River")
         maplist.switch_map(maplist.river_map)
         doc.x = 1096
         doc.y = 864
+
+    # Enter house SW
+    if maplist.worldmap == maplist.river_map and doc.x in range(348, 372+1, 4) and doc.y == 440:
+        print("River -> House SW")
+        maplist.switch_map(maplist.houseSW_map)
+        doc.x = 376
+        doc.y = 528
+
+    # Exit house SW
+    if maplist.worldmap == maplist.houseSW_map and doc.x in range(344, 408+1, 4) and doc.y == 560:
+        print("House SW -> River")
+        maplist.switch_map(maplist.river_map)
+        doc.x = 360
+        doc.y = 448
 
 # Audio
 song = pygame.mixer.Sound("media/audio/music/hologram.mp3")

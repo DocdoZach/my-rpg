@@ -42,28 +42,31 @@ beach_map_entities = []
 beach_map = Map(river_map_tiles, 32, "maps/beach_map.json", beach_map_entities)
 
 river_map_entities = [
-map_sprite("tree", 364, 616),
-map_sprite("tree", 480, 848),
-map_sprite("tree", 300, 1112),
-map_sprite("tree", 716, 916),
-map_sprite("tree", 232, 440),
-map_sprite("tree", 1180, 816),
-map_sprite("tree", 636, 512),
-map_sprite("tree", 892, 376),
-map_sprite("tree", 24, 144),
-map_sprite("tree", 1356, 1060),
-map_sprite("house", 1008, 704),
-map_sprite("house", 272, 288),
-map_sprite("house", 464, 48),
-map_sprite("house", 1328, 304),
-map_sprite("well", 784, 432)
+    map_sprite("tree", 364, 616),
+    map_sprite("tree", 480, 848),
+    map_sprite("tree", 300, 1112),
+    map_sprite("tree", 716, 916),
+    map_sprite("tree", 232, 440),
+    map_sprite("tree", 1180, 816),
+    map_sprite("tree", 636, 512),
+    map_sprite("tree", 892, 376),
+    map_sprite("tree", 24, 144),
+    map_sprite("tree", 1356, 1060),
+    map_sprite("house", 1008, 704),
+    map_sprite("house", 272, 288),
+    map_sprite("house", 464, 48),
+    map_sprite("house", 1328, 304),
+    map_sprite("well", 784, 432)
 ]
 river_map = Map(river_map_tiles, 32, "maps/river_map.json", river_map_entities)
 
-house_map_entities = []
-house_map = Map(house_map_tiles, 32, "maps/house_map.json", house_map_entities)
+houseSE_map_entities = []
+houseSE_map = Map(house_map_tiles, 32, "maps/house_map.json", houseSE_map_entities)
 
-maps = [beach_map, river_map, house_map]
+houseSW_map_entities = []
+houseSW_map = Map(house_map_tiles, 32, "maps/house_map.json", houseSW_map_entities)
+
+maps = [beach_map, river_map, houseSE_map]
 worldmap = beach_map
 for i in maps:
     i.toggle_map(beach_map)
