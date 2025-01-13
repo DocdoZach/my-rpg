@@ -16,7 +16,6 @@ from entity import Entity, active_objects
 from physics import Body
 
 pygame.init()
-pygame.mixer.init()
 
 # Sprite group
 sprite_group = pygame.sprite.Group()

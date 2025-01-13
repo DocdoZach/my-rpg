@@ -74,7 +74,12 @@ houseNE_map.entities = []
 patch_map = Map(river_map_tiles, 32, "maps/patch_map.json", [])
 patch_map.entities = [
     map_sprite("tree", 32, 1092),
-    map_sprite("tree", -28, 1112)
+    map_sprite("tree", -28, 1112),
+    map_sprite("tree", 112, 628),
+    map_sprite("tree", 316, 1124),
+    map_sprite("tree", 340, 280),
+    map_sprite("tree", 948, 540),
+    map_sprite("tree", 1128, 868),
 ]
 
 maps = [beach_map, river_map, houseSE_map, houseSW_map, houseNW_map, patch_map]
