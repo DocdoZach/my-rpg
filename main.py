@@ -28,18 +28,18 @@ screen = create_screen(800, 640, "THE HOLOGR△M")
 def map_exits():
 
     # ID 1 -> 2
-    if maplist.worldmap == maplist.beach_map and doc.x in range(500, 604, 4) and doc.y == 0:
+    if maplist.worldmap == maplist.beach_map and doc.x in range(0, 960+1, 4) and doc.y == -44:
         print("Beach -> River")
         maplist.switch_map(maplist.river_map)
-        doc.x = 1192
-        doc.y = 1512
+        doc.x += 640
+        doc.y = 1520
 
     # ID 2 -> 1
-    if maplist.worldmap == maplist.river_map and doc.x in range(1140, 1244, 4) and doc.y == 1520:
+    if maplist.worldmap == maplist.river_map and doc.x in range(640, 1600+1, 4) and doc.y == 1556:
         print("River -> Beach")
         maplist.switch_map(maplist.beach_map)
-        doc.x = 552
-        doc.y = 8
+        doc.x -= 640
+        doc.y = 0
 
     # Enter house SE
     if maplist.worldmap == maplist.river_map and doc.x in range(1084, 1108+1, 4) and doc.y == 856:
@@ -68,6 +68,46 @@ def map_exits():
         maplist.switch_map(maplist.river_map)
         doc.x = 360
         doc.y = 448
+
+    # Enter house NW
+    if maplist.worldmap == maplist.river_map and doc.x in range(540, 564+1, 4) and doc.y == 200:
+        print("River -> House NW")
+        maplist.switch_map(maplist.houseNW_map)
+        doc.x = 376
+        doc.y = 528
+
+    # Exit house NW
+    if maplist.worldmap == maplist.houseNW_map and doc.x in range(344, 408+1, 4) and doc.y == 560:
+        print("House NW -> River")
+        maplist.switch_map(maplist.river_map)
+        doc.x = 552
+        doc.y = 208
+
+    # Enter house NE
+    if maplist.worldmap == maplist.river_map and doc.x in range(1404, 1428+1, 4) and doc.y == 456:
+        print("River -> House NE")
+        maplist.switch_map(maplist.houseNE_map)
+        doc.x = 376
+        doc.y = 528
+
+    # Exit house NE
+    if maplist.worldmap == maplist.houseNE_map and doc.x in range(344, 408+1, 4) and doc.y == 560:
+        print("House NE -> River")
+        maplist.switch_map(maplist.river_map)
+        doc.x = 1416
+        doc.y = 464
+
+    # ID 2 -> 3
+    if maplist.worldmap == maplist.river_map and doc.x in range(0, 1600+1, 4) and doc.y == -44:
+        print("River -> Patch")
+        maplist.switch_map(maplist.patch_map)
+        doc.y = 1520
+
+    # ID 3 -> 2
+    if maplist.worldmap == maplist.patch_map and doc.x in range(0, 1600+1, 4) and doc.y == 1556:
+        print("Patch -> River")
+        maplist.switch_map(maplist.river_map)
+        doc.y = 0
 
 # Audio
 song = pygame.mixer.Sound("media/audio/music/hologram.mp3")
