@@ -115,7 +115,6 @@ pygame.mixer.Sound.set_volume(song, 0.5)
 
 # Player
 doc = Entity(Player(1, [[sword, 1], [potion, 2]]), Sprite("media/sprites/player/doc.png"), Body(8, 72, 28, 4), x=480, y=768)
-previous_key = ""
 
 # Game clock
 clock = pygame.time.Clock()
@@ -142,26 +141,6 @@ while run:
             if event.key == pygame.K_x:
                 doc.get(Player).open_stats()
 
-            # Walk up sprite
-            if event.key == pygame.K_w or event.key == pygame.K_UP:
-                doc.get(Sprite).reload("media/sprites/player/doc_back.png")
-                previous_key = "w"
-
-            # Walk down sprite
-            if event.key == pygame.K_s or event.key == pygame.K_DOWN:
-                doc.get(Sprite).reload("media/sprites/player/doc.png")
-                previous_key = "s"
-
-            # Walk down sprite
-            if event.key == pygame.K_a or event.key == pygame.K_LEFT:
-                doc.get(Sprite).reload("media/sprites/player/doc_left.png")
-                previous_key = "a"
-
-            # Walk right sprite
-            if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
-                doc.get(Sprite).reload("media/sprites/player/doc_right.png")
-                previous_key = "d"
-
             # Debug testing:
 
             # Print Doc's coordinates
@@ -183,6 +162,10 @@ while run:
             if event.key == pygame.K_p:
                 doc.get(Player).current_hp -= 3
                 print("Lost 3 HP")
+
+            # Print rendered sprites
+            if event.key == pygame.K_r:
+                print(loaded_images)
 
         elif event.type == pygame.KEYUP:
             keyinput.keys_down.remove(event.key)

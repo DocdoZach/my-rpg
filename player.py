@@ -17,6 +17,7 @@ class Player:
         self.inventory = inventory
         self.max_hp = 10 + self.level * 5
         self.current_hp = self.max_hp
+        self.prev_key = ""
 
     def update(self):
         previous_x = self.entity.x
@@ -35,18 +36,34 @@ class Player:
 
         if is_key_pressed(pygame.K_w) or is_key_pressed(pygame.K_UP):
             self.entity.y -= self.move_speed
+            if self.prev_key != "w":
+                self.entity.get(Sprite).delete()
+                self.entity.get(Sprite).__init__("media/sprites/player/doc_back.png")
+            self.prev_key = "w"
 
         if is_key_pressed(pygame.K_s) or is_key_pressed(pygame.K_DOWN):
             self.entity.y += self.move_speed
+            if self.prev_key != "s":
+                self.entity.get(Sprite).delete()
+                self.entity.get(Sprite).__init__("media/sprites/player/doc.png")
+            self.prev_key = "s"
 
         if not body.is_position_valid():
             self.entity.y = previous_y
 
         if is_key_pressed(pygame.K_a) or is_key_pressed(pygame.K_LEFT):
             self.entity.x -= self.move_speed
+            if self.prev_key != "a":
+                self.entity.get(Sprite).delete()
+                self.entity.get(Sprite).__init__("media/sprites/player/doc_left.png")
+            self.prev_key = "a"
 
         if is_key_pressed(pygame.K_d) or is_key_pressed(pygame.K_RIGHT):
             self.entity.x += self.move_speed
+            if self.prev_key != "d":
+                self.entity.get(Sprite).delete()
+                self.entity.get(Sprite).__init__("media/sprites/player/doc_right.png")
+            self.prev_key = "d"
 
         if not body.is_position_valid():
             self.entity.x = previous_x
