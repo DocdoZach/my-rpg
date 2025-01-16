@@ -1,4 +1,4 @@
-# This file contains the Player class. It is used as a component to an Entity object representing the player character. Movement, body and camera are set here.
+# This file contains the Player class. It is used as a component of an Entity object representing the player character. Movement, body and camera are set here.
 
 import pygame
 
@@ -37,38 +37,54 @@ class Player:
             self.move_speed = 4
 
         if is_key_pressed(pygame.K_w) or is_key_pressed(pygame.K_UP):
-            self.entity.y -= self.move_speed
-            if self.prev_key != "w":
-                self.entity.get(Sprite).delete()
-                self.entity.get(Sprite).__init__("media/sprites/player/doc_back.png")
+            if self.entity.y > -44:
+                self.entity.y -= self.move_speed
+                if self.prev_key != "w":
+                    self.entity.get(Sprite).delete()
+                    self.entity.get(Sprite).__init__("media/sprites/player/doc_back.png")
             self.prev_key = "w"
 
         if is_key_pressed(pygame.K_s) or is_key_pressed(pygame.K_DOWN):
-            self.entity.y += self.move_speed
-            if self.prev_key != "s":
-                self.entity.get(Sprite).delete()
-                self.entity.get(Sprite).__init__("media/sprites/player/doc.png")
+            if self.entity.y < maplist.worldmap.height * 32 - 44:
+                self.entity.y += self.move_speed
+                if self.prev_key != "s":
+                    self.entity.get(Sprite).delete()
+                    self.entity.get(Sprite).__init__("media/sprites/player/doc.png")
             self.prev_key = "s"
 
         if not body.is_position_valid():
             self.entity.y = previous_y
 
         if is_key_pressed(pygame.K_a) or is_key_pressed(pygame.K_LEFT):
-            self.entity.x -= self.move_speed
-            if self.prev_key != "a":
-                self.entity.get(Sprite).delete()
-                self.entity.get(Sprite).__init__("media/sprites/player/doc_left.png")
+            if self.entity.x > -12:
+                self.entity.x -= self.move_speed
+                if self.prev_key != "a":
+                    self.entity.get(Sprite).delete()
+                    self.entity.get(Sprite).__init__("media/sprites/player/doc_left.png")
             self.prev_key = "a"
 
         if is_key_pressed(pygame.K_d) or is_key_pressed(pygame.K_RIGHT):
-            self.entity.x += self.move_speed
-            if self.prev_key != "d":
-                self.entity.get(Sprite).delete()
-                self.entity.get(Sprite).__init__("media/sprites/player/doc_right.png")
+            if self.entity.x < maplist.worldmap.width * 32 - 36:
+                self.entity.x += self.move_speed
+                if self.prev_key != "d":
+                    self.entity.get(Sprite).delete()
+                    self.entity.get(Sprite).__init__("media/sprites/player/doc_right.png")
             self.prev_key = "d"
 
         if not body.is_position_valid():
             self.entity.x = previous_x
+
+        if is_key_pressed(pygame.K_w) and is_key_pressed(pygame.K_a) and is_key_pressed(pygame.K_d):
+            if self.prev_key != "w":
+                self.entity.get(Sprite).delete()
+                self.entity.get(Sprite).__init__("media/sprites/player/doc_back.png")
+            self.prev_key = "w"
+
+        if is_key_pressed(pygame.K_s) and is_key_pressed(pygame.K_a) and is_key_pressed(pygame.K_d):
+            if self.prev_key != "s":
+                self.entity.get(Sprite).delete()
+                self.entity.get(Sprite).__init__("media/sprites/player/doc.png")
+            self.prev_key = "s"
 
         target_camera_x = self.entity.x - camera.width / 2 + sprite.image.get_width()/2
         target_camera_y = self.entity.y - camera.height / 2 + sprite.image.get_height()/2
@@ -115,7 +131,7 @@ class Player:
         except ValueError:
             selection = int(input("Invalid option. Select the number of the item to use: "))
         while True:
-            if selection < 0 or selection > len(self.inventory):
+            if selection <= 0 or selection > len(self.inventory):
                 selection = int(input("Invalid option. Select the number of the item to use: "))
                 continue
             else:
