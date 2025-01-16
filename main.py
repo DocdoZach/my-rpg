@@ -14,6 +14,7 @@ from tilemap import *
 from camera import create_screen
 from entity import Entity, active_objects
 from physics import Body
+from battle import Battle
 
 pygame.init()
 
@@ -114,14 +115,22 @@ pygame.mixer.Sound.set_volume(song, 0.5)
 #pygame.mixer.Sound.play(song)
 
 # Player
-doc = Entity(Player(1, [[sword, 1], [potion, 2]]), Sprite("media/sprites/player/doc.png"), Body(8, 72, 28, 4), x=480, y=768)
+doc = Entity(Player(1, [[sword, 1], [potion, 2]]),
+             Sprite("media/sprites/player/doc.png"),
+             Body(12, 72, 24, 8),
+             x=480, y=768)
+
+aesor = Entity(Sprite("media/sprites/aesor.png"),
+               Body(0, 0, 64, 96),
+               x=400, y=400)
 
 # Game clock
 clock = pygame.time.Clock()
 
 # Game loop
-run = True
-while run:
+is_running = True
+in_battle = False
+while is_running:
 
     # Game clock frequency (60Hz)
     clock.tick(60)
@@ -129,43 +138,47 @@ while run:
     # Event handler (quit game, keys pressed)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            run = False
+            is_running = False
         elif event.type == pygame.KEYDOWN:
             keyinput.keys_down.add(event.key)
+            if not in_battle:
+                # Open inventory
+                if event.key == pygame.K_z:
+                    doc.get(Player).open_inventory()
 
-            # Open inventory
-            if event.key == pygame.K_z:
-                doc.get(Player).open_inventory()
+                # Open stats
+                if event.key == pygame.K_x:
+                    doc.get(Player).open_stats()
 
-            # Open stats
-            if event.key == pygame.K_x:
-                doc.get(Player).open_stats()
+                # Debug testing:
 
-            # Debug testing:
+                # Create Battle object
+                if event.key == pygame.K_b:
+                    Battle(doc, aesor, None)
 
-            # Print Doc's coordinates
-            if event.key == pygame.K_e:
-                print(f"x, y: {doc.x}, {doc.y}")
+                # Print Doc's coordinates
+                if event.key == pygame.K_e:
+                    print(f"x, y: {doc.x}, {doc.y}")
 
-            # Level up
-            if event.key == pygame.K_RIGHTBRACKET:
-                doc.get(Player).level += 1
-                print(f"Leveled up to level {doc.get(Player).level}")
+                # Level up
+                if event.key == pygame.K_RIGHTBRACKET:
+                    doc.get(Player).level += 1
+                    print(f"Leveled up to level {doc.get(Player).level}")
 
-            # Level down
-            if event.key == pygame.K_LEFTBRACKET:
-                if doc.get(Player).level != 1:
-                    doc.get(Player).level -= 1
-                    print(f"Leveled down to level {doc.get(Player).level}")
+                # Level down
+                if event.key == pygame.K_LEFTBRACKET:
+                    if doc.get(Player).level != 1:
+                        doc.get(Player).level -= 1
+                        print(f"Leveled down to level {doc.get(Player).level}")
 
-            # Lose 3 HP
-            if event.key == pygame.K_p:
-                doc.get(Player).current_hp -= 3
-                print("Lost 3 HP")
+                # Lose 3 HP
+                if event.key == pygame.K_p:
+                    doc.get(Player).current_hp -= 3
+                    print("Lost 3 HP")
 
-            # Print rendered sprites
-            if event.key == pygame.K_r:
-                print(loaded_images)
+                # Print rendered sprites
+                if event.key == pygame.K_r:
+                    print(loaded_images)
 
         elif event.type == pygame.KEYUP:
             keyinput.keys_down.remove(event.key)

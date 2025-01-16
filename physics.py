@@ -13,7 +13,7 @@ class Body:
         from maplist import worldmap
         x = self.entity.x + self.hitbox.x
         y = self.entity.y + self.hitbox.y
-        if worldmap.is_tile_solid(x, y, self.hitbox.width, self.hitbox.height):
+        if worldmap.is_tile_solid(x, y, self.hitbox.width-4, self.hitbox.height-4):
             return False
         for body in bodies:
             if body != self and body.is_colliding_with(self):

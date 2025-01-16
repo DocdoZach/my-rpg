@@ -7,11 +7,11 @@ from tilemap import *
 
 def map_sprite(kind, x, y):
     if kind == "tree":
-        return Entity(Sprite("media/sprites/tree.png"), Body(40, 96, 44, 64), x=x, y=y)
+        return Entity(Sprite("media/sprites/tree.png"), Body(44, 100, 40, 60), x=x, y=y)
     if kind == "house":
-        return Entity(Sprite("media/sprites/house.png"), Body(28, 92, 164, 132), x=x, y=y)
+        return Entity(Sprite("media/sprites/house.png"), Body(32, 96, 160, 128), x=x, y=y)
     if kind == "well":
-        return Entity(Sprite("media/sprites/well.png"), Body(28, 92, 164, 132), x=x, y=y)
+        return Entity(Sprite("media/sprites/well.png"), Body(32, 96, 160, 128), x=x, y=y)
 
 def switch_map(new_map):
     global worldmap

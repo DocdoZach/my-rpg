@@ -1,6 +1,8 @@
 # This file contains the Player class. It is used as a component to an Entity object representing the player character. Movement, body and camera are set here.
 
 import pygame
+
+from battle import Battle
 from itemlist import *
 from sprite import Sprite
 from keyinput import is_key_pressed
@@ -80,7 +82,10 @@ class Player:
         elif target_camera_y > maplist.worldmap.height * maplist.worldmap.tile_size - camera.height:
             target_camera_y = maplist.worldmap.height * maplist.worldmap.tile_size - camera.height
 
-        camera.x = target_camera_x
+        if Battle in active_objects:
+            camera.x = self.entity.x - 200
+        else:
+            camera.x = target_camera_x
         camera.y = target_camera_y
 
     def use_item(self, item):
