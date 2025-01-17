@@ -7,11 +7,13 @@ from tilemap import *
 
 def map_sprite(kind, x, y):
     if kind == "tree":
-        return Entity(Sprite("media/sprites/tree.png"), Body(44, 100, 40, 60), x=x, y=y)
+        return Entity(Sprite("media/sprites/tree.png", False), Body(44, 100, 40, 60), x=x, y=y)
     if kind == "house":
-        return Entity(Sprite("media/sprites/house.png"), Body(32, 96, 160, 128), x=x, y=y)
+        return Entity(Sprite("media/sprites/house.png", False), Body(32, 96, 160, 128), x=x, y=y)
     if kind == "well":
-        return Entity(Sprite("media/sprites/well.png"), Body(32, 96, 160, 128), x=x, y=y)
+        return Entity(Sprite("media/sprites/well.png", False), Body(32, 96, 160, 128), x=x, y=y)
+    if kind == "carpet":
+        return Entity(Sprite("media/sprites/carpet.png", True), Body(0, 0, 0, 0), x=x, y=y)
 
 def switch_map(new_map):
     global worldmap
@@ -60,16 +62,24 @@ river_map.entities = [
 ]
 
 houseSE_map = Map(house_map_tiles, 32, "maps/house_map.json", [])
-houseSE_map.entities = []
+houseSE_map.entities = [
+    map_sprite("carpet", 288, 240)
+]
 
 houseSW_map = Map(house_map_tiles, 32, "maps/house_map.json", [])
-houseSW_map.entities = []
+houseSW_map.entities = [
+    map_sprite("carpet", 288, 240)
+]
 
 houseNW_map = Map(house_map_tiles, 32, "maps/house_map.json", [])
-houseNW_map.entities = []
+houseNW_map.entities = [
+    map_sprite("carpet", 288, 240)
+]
 
 houseNE_map = Map(house_map_tiles, 32, "maps/house_map.json", [])
-houseNE_map.entities = []
+houseNE_map.entities = [
+    map_sprite("carpet", 288, 240)
+]
 
 patch_map = Map(river_map_tiles, 32, "maps/patch_map.json", [])
 patch_map.entities = [
@@ -82,7 +92,7 @@ patch_map.entities = [
     map_sprite("tree", 1128, 868),
 ]
 
-maps = [beach_map, river_map, houseSE_map, houseSW_map, houseNW_map, patch_map]
+maps = [beach_map, river_map, houseSE_map, houseSW_map, houseNW_map, houseNE_map, patch_map]
 worldmap = beach_map
 for i in maps:
     i.toggle_map(beach_map)

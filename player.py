@@ -2,7 +2,7 @@
 
 import pygame
 
-from battle import Battle
+import battle
 from itemlist import *
 from sprite import Sprite
 from keyinput import is_key_pressed
@@ -28,9 +28,11 @@ class Player:
         body = self.entity.get(Body)
 
         # Player's stats
+
         self.max_hp = 10 + self.level * 5
 
         # Player's movement
+
         if is_key_pressed(pygame.K_LCTRL):
             self.move_speed = 8
         else:
@@ -86,6 +88,8 @@ class Player:
                 self.entity.get(Sprite).__init__("media/sprites/player/doc.png")
             self.prev_key = "s"
 
+        # Camera calculations
+
         target_camera_x = self.entity.x - camera.width / 2 + sprite.image.get_width()/2
         target_camera_y = self.entity.y - camera.height / 2 + sprite.image.get_height()/2
 
@@ -98,9 +102,9 @@ class Player:
         elif target_camera_y > maplist.worldmap.height * maplist.worldmap.tile_size - camera.height:
             target_camera_y = maplist.worldmap.height * maplist.worldmap.tile_size - camera.height
 
-        if Battle in active_objects:
-            camera.x = self.entity.x - 200
-        else:
+        if battle.in_battle:
+            camera.x = self.entity.x + 100
+        elif not battle.in_battle:
             camera.x = target_camera_x
         camera.y = target_camera_y
 

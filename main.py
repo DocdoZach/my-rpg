@@ -4,6 +4,8 @@ Zach N
 '''
 
 import pygame
+
+import battle
 from sprite import loaded_images
 import keyinput
 from itemlist import *
@@ -120,16 +122,15 @@ doc = Entity(Player(1, [[sword, 1], [potion, 2]]),
              Body(12, 72, 24, 8),
              x=480, y=768)
 
-aesor = Entity(Sprite("media/sprites/aesor.png"),
-               Body(0, 0, 64, 96),
-               x=400, y=400)
+#aesor = Entity(Sprite("media/sprites/aesor.png"),
+#               Body(0, 0, 64, 96),
+#               x=400, y=400)
 
 # Game clock
 clock = pygame.time.Clock()
 
 # Game loop
 is_running = True
-in_battle = False
 while is_running:
 
     # Game clock frequency (60Hz)
@@ -141,7 +142,7 @@ while is_running:
             is_running = False
         elif event.type == pygame.KEYDOWN:
             keyinput.keys_down.add(event.key)
-            if not in_battle:
+            if not battle.in_battle:
                 # Open inventory
                 if event.key == pygame.K_z:
                     doc.get(Player).open_inventory()
@@ -176,10 +177,6 @@ while is_running:
                     doc.get(Player).current_hp -= 3
                     print("Lost 3 HP")
 
-                # Print rendered sprites
-                if event.key == pygame.K_r:
-                    print(loaded_images)
-
         elif event.type == pygame.KEYUP:
             keyinput.keys_down.remove(event.key)
 
@@ -191,10 +188,16 @@ while is_running:
     # Check for map exits
     map_exits()
 
+    print(battle.in_battle)
+
     # Draw sprites
     screen.fill((16, 16, 16))
     maplist.worldmap.draw(screen)
     sprites.sort(key=lambda sprite: sprite.entity.y+sprite.image.get_height())
+    for i in sprites:
+        if i.is_bg:
+            sprites.remove(i)
+            sprites.insert(0, i)
     for i in sprites:
         i.draw(screen)
     pygame.display.flip()

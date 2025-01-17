@@ -7,8 +7,9 @@ sprites = []
 loaded_images = {}
 
 class Sprite:
-    def __init__(self, image_file):
+    def __init__(self, image_file, is_bg=False):
         self.show = True
+        self.is_bg = is_bg
         if image_file in loaded_images:
             self.image = loaded_images[image_file]
         else:
