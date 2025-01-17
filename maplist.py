@@ -14,6 +14,10 @@ def map_sprite(kind, x, y):
         return Entity(Sprite("media/sprites/well.png", False), Body(32, 96, 160, 128), x=x, y=y)
     if kind == "carpet":
         return Entity(Sprite("media/sprites/carpet.png", True), Body(0, 0, 0, 0), x=x, y=y)
+    if kind == "chair":
+        return Entity(Sprite("media/sprites/chair.png", True), Body(0, 0, 40, 64), x=x, y=y)
+    if kind == "purple npc":
+        return Entity(Sprite("media/sprites/npc_purple.png", False), Body(12, 72, 24, 8), x=x, y=y)
 
 def switch_map(new_map):
     global worldmap
@@ -63,7 +67,9 @@ river_map.entities = [
 
 houseSE_map = Map(house_map_tiles, 32, "maps/house_map.json", [])
 houseSE_map.entities = [
-    map_sprite("carpet", 288, 240)
+    map_sprite("carpet", 288, 240),
+    map_sprite("chair", 240, 240),
+    map_sprite("purple npc", 424, 272)
 ]
 
 houseSW_map = Map(house_map_tiles, 32, "maps/house_map.json", [])

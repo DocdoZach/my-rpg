@@ -41,18 +41,14 @@ class Player:
         if is_key_pressed(pygame.K_w) or is_key_pressed(pygame.K_UP):
             if self.entity.y > -44:
                 self.entity.y -= self.move_speed
-                if self.prev_key != "w":
-                    self.entity.get(Sprite).delete()
-                    self.entity.get(Sprite).__init__("media/sprites/player/doc_back.png")
-            self.prev_key = "w"
+                self.entity.get(Sprite).delete()
+                self.entity.get(Sprite).__init__("media/sprites/player/doc_back.png")
 
         if is_key_pressed(pygame.K_s) or is_key_pressed(pygame.K_DOWN):
             if self.entity.y < maplist.worldmap.height * 32 - 44:
                 self.entity.y += self.move_speed
-                if self.prev_key != "s":
-                    self.entity.get(Sprite).delete()
-                    self.entity.get(Sprite).__init__("media/sprites/player/doc.png")
-            self.prev_key = "s"
+                self.entity.get(Sprite).delete()
+                self.entity.get(Sprite).__init__("media/sprites/player/doc.png")
 
         if not body.is_position_valid():
             self.entity.y = previous_y
@@ -60,33 +56,25 @@ class Player:
         if is_key_pressed(pygame.K_a) or is_key_pressed(pygame.K_LEFT):
             if self.entity.x > -12:
                 self.entity.x -= self.move_speed
-                if self.prev_key != "a":
-                    self.entity.get(Sprite).delete()
-                    self.entity.get(Sprite).__init__("media/sprites/player/doc_left.png")
-            self.prev_key = "a"
+                self.entity.get(Sprite).delete()
+                self.entity.get(Sprite).__init__("media/sprites/player/doc_left.png")
 
         if is_key_pressed(pygame.K_d) or is_key_pressed(pygame.K_RIGHT):
             if self.entity.x < maplist.worldmap.width * 32 - 36:
                 self.entity.x += self.move_speed
-                if self.prev_key != "d":
-                    self.entity.get(Sprite).delete()
-                    self.entity.get(Sprite).__init__("media/sprites/player/doc_right.png")
-            self.prev_key = "d"
+                self.entity.get(Sprite).delete()
+                self.entity.get(Sprite).__init__("media/sprites/player/doc_right.png")
 
         if not body.is_position_valid():
             self.entity.x = previous_x
 
         if is_key_pressed(pygame.K_w) and is_key_pressed(pygame.K_a) and is_key_pressed(pygame.K_d):
-            if self.prev_key != "w":
-                self.entity.get(Sprite).delete()
-                self.entity.get(Sprite).__init__("media/sprites/player/doc_back.png")
-            self.prev_key = "w"
+            self.entity.get(Sprite).delete()
+            self.entity.get(Sprite).__init__("media/sprites/player/doc_back.png")
 
         if is_key_pressed(pygame.K_s) and is_key_pressed(pygame.K_a) and is_key_pressed(pygame.K_d):
-            if self.prev_key != "s":
-                self.entity.get(Sprite).delete()
-                self.entity.get(Sprite).__init__("media/sprites/player/doc.png")
-            self.prev_key = "s"
+            self.entity.get(Sprite).delete()
+            self.entity.get(Sprite).__init__("media/sprites/player/doc.png")
 
         # Camera calculations
 

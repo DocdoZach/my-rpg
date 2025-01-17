@@ -115,7 +115,6 @@ def map_exits():
 song = pygame.mixer.Sound("media/audio/music/hologram.mp3")
 pygame.mixer.Sound.set_volume(song, 0.5)
 
-
 # Player
 doc = Entity(Player(1, [[sword, 1], [potion, 2]]),
              Sprite("media/sprites/player/doc.png"),
@@ -160,7 +159,8 @@ while is_running:
 
                 # Create Battle object
                 if event.key == pygame.K_b:
-                    battle.current_battle = Battle(doc, aesor, None)
+                    battle.current_battle = Battle(doc, aesor, song)
+                    doc.get(Sprite).delete()
                     doc.get(Sprite).__init__("media/sprites/player/doc_back.png")
 
                 # Print Doc's coordinates
@@ -201,6 +201,11 @@ while is_running:
 
     # Check for map exits
     map_exits()
+
+    # Check for object interaction
+    if maplist.worldmap == maplist.houseSE_map and doc.x in range(228, 244+1, 4) and doc.y == 232:
+        doc.get(Sprite).delete()
+        doc.get(Sprite).__init__("media/sprites/player/doc.png")
 
     # Draw sprites
     screen.fill((16, 16, 16))
