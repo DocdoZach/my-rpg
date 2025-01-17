@@ -14,7 +14,7 @@ from sprite import sprites, Sprite
 from player import Player
 from tilemap import *
 from camera import create_screen
-from entity import Entity, active_objects
+from entity import Entity, active_objects, Enemy
 from physics import Body
 from battle import Battle
 
@@ -122,9 +122,11 @@ doc = Entity(Player(1, [[sword, 1], [potion, 2]]),
              Body(12, 72, 24, 8),
              x=480, y=768)
 
-#aesor = Entity(Sprite("media/sprites/aesor.png"),
-#               Body(0, 0, 64, 96),
-#               x=400, y=400)
+aesor = Entity(Enemy(1),
+               Sprite("media/sprites/aesor.png"),
+               Body(0, 0, 64, 96),
+               x=0, y=0)
+aesor.get(Sprite).show = False
 
 # Game clock
 clock = pygame.time.Clock()
@@ -143,6 +145,7 @@ while is_running:
         elif event.type == pygame.KEYDOWN:
             keyinput.keys_down.add(event.key)
             if not battle.in_battle:
+
                 # Open inventory
                 if event.key == pygame.K_z:
                     doc.get(Player).open_inventory()
@@ -156,6 +159,10 @@ while is_running:
                 # Create Battle object
                 if event.key == pygame.K_b:
                     Battle(doc, aesor, None)
+                    aesor.x = doc.x - 8
+                    aesor.y = doc.y - 128
+                    aesor.get(Sprite).show = True
+                    doc.get(Sprite).__init__("media/sprites/player/doc_back.png")
 
                 # Print Doc's coordinates
                 if event.key == pygame.K_e:
@@ -188,8 +195,6 @@ while is_running:
     # Check for map exits
     map_exits()
 
-    print(battle.in_battle)
-
     # Draw sprites
     screen.fill((16, 16, 16))
     maplist.worldmap.draw(screen)
@@ -201,5 +206,20 @@ while is_running:
     for i in sprites:
         i.draw(screen)
     pygame.display.flip()
+
+    # Battle mode
+    if battle.in_battle:
+        print("\n----------\n1. Fight\n2. Use item\n3. Flee battle\n----------")
+        try:
+            decision = int(input("What will you do? Select a number (1-3): "))
+            match decision:
+                case 2:
+                    doc.get(Player).open_inventory()
+                case 3:
+                    battle.in_battle = False
+                    print("You fled the battle.")
+        except ValueError:
+            int(input("Invalid option. Select a number (1-3): "))
+
 
 pygame.quit()

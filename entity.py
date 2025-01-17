@@ -31,3 +31,9 @@ class Entity:
             if isinstance(c, kind):
                 return c
         return None
+
+class Enemy():
+    def __init__(self, level):
+        self.level = level
+        self.max_hp = 10 + self.level * 5
+        self.current_hp = self.max_hp

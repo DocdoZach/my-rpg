@@ -102,16 +102,16 @@ class Player:
         elif target_camera_y > maplist.worldmap.height * maplist.worldmap.tile_size - camera.height:
             target_camera_y = maplist.worldmap.height * maplist.worldmap.tile_size - camera.height
 
-        if battle.in_battle:
-            camera.x = self.entity.x + 100
-        elif not battle.in_battle:
-            camera.x = target_camera_x
+        camera.x = target_camera_x
         camera.y = target_camera_y
 
     def use_item(self, item):
         if item == sword:
-            print("You can only use this in battle!")
-            return
+            if not battle.in_battle:
+                print("You can only use this in battle!")
+                return
+            else:
+
         elif item == potion:
             if self.current_hp == self.max_hp:
                 print(f"Your HP is already full ({self.current_hp}/{self.max_hp} HP)!")
@@ -126,7 +126,7 @@ class Player:
                 return
 
     def open_inventory(self):
-        print("\n\n\n\n\n\n\n\n----------\nDoc's Inventory:")
+        print("\n----------\nDoc's Inventory:")
         for (i, item) in enumerate(self.inventory):
             print(f"{i+1}. {item[0][0]} x{item[1]}")
         print("----------")
@@ -143,6 +143,6 @@ class Player:
         self.use_item(self.inventory[selection-1][0])
 
     def open_stats(self):
-        print("\n\n\n\n\n\n\n\n----------\nDoc's Stats:")
+        print("\n----------\nDoc's Stats:")
         print(f"Level {self.level}\n{self.current_hp}/{self.max_hp} HP")
         print("----------")
