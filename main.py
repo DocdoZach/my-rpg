@@ -114,7 +114,7 @@ def map_exits():
 # Audio
 song = pygame.mixer.Sound("media/audio/music/hologram.mp3")
 pygame.mixer.Sound.set_volume(song, 0.5)
-#pygame.mixer.Sound.play(song)
+
 
 # Player
 doc = Entity(Player(1, [[sword, 1], [potion, 2]]),
@@ -122,11 +122,13 @@ doc = Entity(Player(1, [[sword, 1], [potion, 2]]),
              Body(12, 72, 24, 8),
              x=480, y=768)
 
+# Boss
 aesor = Entity(Enemy(1),
                Sprite("media/sprites/aesor.png"),
                Body(0, 0, 64, 96),
                x=0, y=0)
 aesor.get(Sprite).show = False
+physics.bodies.remove(aesor.get(Body))
 
 # Game clock
 clock = pygame.time.Clock()
@@ -158,10 +160,7 @@ while is_running:
 
                 # Create Battle object
                 if event.key == pygame.K_b:
-                    Battle(doc, aesor, None)
-                    aesor.x = doc.x - 8
-                    aesor.y = doc.y - 128
-                    aesor.get(Sprite).show = True
+                    battle.current_battle = Battle(doc, aesor, None)
                     doc.get(Sprite).__init__("media/sprites/player/doc_back.png")
 
                 # Print Doc's coordinates
@@ -183,6 +182,14 @@ while is_running:
                 if event.key == pygame.K_p:
                     doc.get(Player).current_hp -= 3
                     print("Lost 3 HP")
+
+                # Toggle on music
+                if event.key == pygame.K_n:
+                    pygame.mixer.Sound.play(song)
+
+                # Toggle off music
+                if event.key == pygame.K_m:
+                    pygame.mixer.stop()
 
         elif event.type == pygame.KEYUP:
             keyinput.keys_down.remove(event.key)
@@ -209,17 +216,6 @@ while is_running:
 
     # Battle mode
     if battle.in_battle:
-        print("\n----------\n1. Fight\n2. Use item\n3. Flee battle\n----------")
-        try:
-            decision = int(input("What will you do? Select a number (1-3): "))
-            match decision:
-                case 2:
-                    doc.get(Player).open_inventory()
-                case 3:
-                    battle.in_battle = False
-                    print("You fled the battle.")
-        except ValueError:
-            int(input("Invalid option. Select a number (1-3): "))
-
+        battle.current_battle.your_turn()
 
 pygame.quit()

@@ -111,6 +111,7 @@ class Player:
                 print("You can only use this in battle!")
                 return
             else:
+                battle.current_battle.use_sword()
 
         elif item == potion:
             if self.current_hp == self.max_hp:
