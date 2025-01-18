@@ -1,5 +1,6 @@
 # This file contains a list of maps and the tiles used by them.
 
+import physics
 from entity import Entity
 from physics import Body
 from sprite import Sprite
@@ -121,3 +122,6 @@ maps = [beach_map, river_map, houseSE_map, houseSW_map, houseNW_map, houseNE_map
 worldmap = beach_map
 for i in maps:
     i.toggle_map(beach_map)
+physics.bodies = []
+for j in beach_map.entities:
+    physics.bodies.append(j.get(Body))

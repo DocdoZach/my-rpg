@@ -117,6 +117,15 @@ def map_exits():
         maplist.switch_map(maplist.beach_map)
         doc.x = 0
 
+    # ruins <-> west beach
+    if maplist.worldmap == maplist.ruins_map and doc.x in range(0, 1600+1, 4) and doc.y == 1556:
+        print("Ruins -> West Beach")
+        maplist.switch_map(maplist.west_beach_map)
+        doc.y = 0
+    if maplist.worldmap == maplist.west_beach_map and doc.x in range(0, 1600+1, 4) and doc.y == -44:
+        print("West Beach -> Ruins")
+        maplist.switch_map(maplist.ruins_map)
+        doc.y = 1520
 # Audio
 song = pygame.mixer.Sound("media/audio/music/hologram.mp3")
 pygame.mixer.Sound.set_volume(song, 0.5)
