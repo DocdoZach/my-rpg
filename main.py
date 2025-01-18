@@ -29,87 +29,93 @@ screen = create_screen(800, 640, "THE HOLOGR△M")
 # Map exit checks
 def map_exits():
 
-    # ID 1 -> 2
-    if maplist.worldmap == maplist.beach_map and doc.x in range(0, 960+1, 4) and doc.y == -44:
+    # beach <-> river
+    if maplist.worldmap == maplist.beach_map and doc.x in range(0, 1600+1, 4) and doc.y == -44:
         print("Beach -> River")
         maplist.switch_map(maplist.river_map)
-        doc.x += 640
         doc.y = 1520
-
-    # ID 2 -> 1
-    if maplist.worldmap == maplist.river_map and doc.x in range(640, 1600+1, 4) and doc.y == 1556:
+    if maplist.worldmap == maplist.river_map and doc.x in range(0, 1600+1, 4) and doc.y == 1556:
         print("River -> Beach")
         maplist.switch_map(maplist.beach_map)
-        doc.x -= 640
         doc.y = 0
 
-    # Enter house SE
+    # Enter/exit house SE
     if maplist.worldmap == maplist.river_map and doc.x in range(1084, 1108+1, 4) and doc.y == 856:
         print("River -> House SE")
         maplist.switch_map(maplist.houseSE_map)
         doc.x = 376
         doc.y = 528
-
-    # Exit house SE
     if maplist.worldmap == maplist.houseSE_map and doc.x in range(344, 408+1, 4) and doc.y == 560:
         print("House SE -> River")
         maplist.switch_map(maplist.river_map)
         doc.x = 1096
         doc.y = 864
 
-    # Enter house SW
+    # Enter/exit house SW
     if maplist.worldmap == maplist.river_map and doc.x in range(348, 372+1, 4) and doc.y == 440:
         print("River -> House SW")
         maplist.switch_map(maplist.houseSW_map)
         doc.x = 376
         doc.y = 528
-
-    # Exit house SW
     if maplist.worldmap == maplist.houseSW_map and doc.x in range(344, 408+1, 4) and doc.y == 560:
         print("House SW -> River")
         maplist.switch_map(maplist.river_map)
         doc.x = 360
         doc.y = 448
 
-    # Enter house NW
+    # Enter/exit house NW
     if maplist.worldmap == maplist.river_map and doc.x in range(540, 564+1, 4) and doc.y == 200:
         print("River -> House NW")
         maplist.switch_map(maplist.houseNW_map)
         doc.x = 376
         doc.y = 528
-
-    # Exit house NW
     if maplist.worldmap == maplist.houseNW_map and doc.x in range(344, 408+1, 4) and doc.y == 560:
         print("House NW -> River")
         maplist.switch_map(maplist.river_map)
         doc.x = 552
         doc.y = 208
 
-    # Enter house NE
+    # Enter/exit house NE
     if maplist.worldmap == maplist.river_map and doc.x in range(1404, 1428+1, 4) and doc.y == 456:
         print("River -> House NE")
         maplist.switch_map(maplist.houseNE_map)
         doc.x = 376
         doc.y = 528
-
-    # Exit house NE
     if maplist.worldmap == maplist.houseNE_map and doc.x in range(344, 408+1, 4) and doc.y == 560:
         print("House NE -> River")
         maplist.switch_map(maplist.river_map)
         doc.x = 1416
         doc.y = 464
 
-    # ID 2 -> 3
+    # river <-> patch
     if maplist.worldmap == maplist.river_map and doc.x in range(0, 1600+1, 4) and doc.y == -44:
         print("River -> Patch")
         maplist.switch_map(maplist.patch_map)
         doc.y = 1520
-
-    # ID 3 -> 2
     if maplist.worldmap == maplist.patch_map and doc.x in range(0, 1600+1, 4) and doc.y == 1556:
         print("Patch -> River")
         maplist.switch_map(maplist.river_map)
         doc.y = 0
+
+    # river <-> ruins
+    if maplist.worldmap == maplist.river_map and doc.x == -12 and doc.y in range(0, 1600+1, 4):
+        print("River -> Ruins")
+        maplist.switch_map(maplist.ruins_map)
+        doc.x = 1520
+    if maplist.worldmap == maplist.ruins_map and doc.x == 1564 and doc.y in range(0, 1600+1, 4):
+        print("Ruins -> River")
+        maplist.switch_map(maplist.river_map)
+        doc.x = 0
+
+    # beach <-> west beach
+    if maplist.worldmap == maplist.beach_map and doc.x == -12 and doc.y in range(0, 1600+1, 4):
+        print("Beach -> West Beach")
+        maplist.switch_map(maplist.west_beach_map)
+        doc.x = 1520
+    if maplist.worldmap == maplist.west_beach_map and doc.x == 1564 and doc.y in range(0, 1600+1, 4):
+        print("West Beach -> Beach")
+        maplist.switch_map(maplist.beach_map)
+        doc.x = 0
 
 # Audio
 song = pygame.mixer.Sound("media/audio/music/hologram.mp3")
@@ -190,6 +196,9 @@ while is_running:
                 # Toggle off music
                 if event.key == pygame.K_m:
                     pygame.mixer.stop()
+
+                if event.key == pygame.K_t:
+                    print(sprites)
 
         elif event.type == pygame.KEYUP:
             keyinput.keys_down.remove(event.key)
