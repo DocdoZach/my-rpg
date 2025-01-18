@@ -126,6 +126,27 @@ def map_exits():
         print("West Beach -> Ruins")
         maplist.switch_map(maplist.ruins_map)
         doc.y = 1520
+
+    # patch <-> castle_gate
+    if maplist.worldmap == maplist.patch_map and doc.x == -12 and doc.y in range(0, 1600+1, 4):
+        print("Patch -> Castle Gate")
+        maplist.switch_map(maplist.castle_gate_map)
+        doc.x = 1520
+    if maplist.worldmap == maplist.castle_gate_map and doc.x == 1564 and doc.y in range(0, 1600+1, 4):
+        print("Castle Gate -> Patch")
+        maplist.switch_map(maplist.patch_map)
+        doc.x = 0
+
+    # ruins <-> castle_gate
+    if maplist.worldmap == maplist.ruins_map and doc.x in range(0, 1600+1, 4) and doc.y == -44:
+        print("Ruins -> Castle Gate")
+        maplist.switch_map(maplist.castle_gate_map)
+        doc.y = 1520
+    if maplist.worldmap == maplist.castle_gate_map and doc.x in range(0, 1600+1, 4) and doc.y == 1556:
+        print("Castle Gate -> Ruins")
+        maplist.switch_map(maplist.ruins_map)
+        doc.y = 0
+
 # Audio
 song = pygame.mixer.Sound("media/audio/music/hologram.mp3")
 pygame.mixer.Sound.set_volume(song, 0.5)

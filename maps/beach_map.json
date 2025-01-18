@@ -62,9 +62,44 @@
          "width":50,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":2,
+         "name":"Object Layer 1",
+         "objects":[
+                {
+                 "gid":14,
+                 "height":160,
+                 "id":2,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":128,
+                 "x":200,
+                 "y":188
+                }, 
+                {
+                 "gid":14,
+                 "height":160,
+                 "id":3,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":128,
+                 "x":788,
+                 "y":92
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":2,
- "nextobjectid":1,
+ "nextlayerid":3,
+ "nextobjectid":4,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",
@@ -72,7 +107,11 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"river_map.tsx"
+         "source":"overworld_tiles.tsx"
+        }, 
+        {
+         "firstgid":12,
+         "source":"sprites.tsx"
         }],
  "tilewidth":32,
  "type":"map",

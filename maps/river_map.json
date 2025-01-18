@@ -263,7 +263,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"river_map.tsx"
+         "source":"overworld_tiles.tsx"
         }, 
         {
          "firstgid":10,

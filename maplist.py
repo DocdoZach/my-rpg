@@ -26,7 +26,7 @@ def switch_map(new_map):
     worldmap = new_map
     worldmap.toggle_map(new_map)
 
-river_map_tiles = [
+overworld_tiles = [
     None,
     TileType("grass", False, "media/sprites/tiles/grass_tile.png"),
     TileType("dirt", False, "media/sprites/tiles/dirt_tile.png"),
@@ -47,13 +47,13 @@ house_map_tiles = [
     TileType("brick", True, "media/sprites/tiles/brick_tile.png")
 ]
 
-beach_map = Map(river_map_tiles, 32, "maps/beach_map.json", [])
+beach_map = Map(overworld_tiles, 32, "maps/beach_map.json", [])
 beach_map.entities = [
     map_sprite("tree", 788, 92),
     map_sprite("tree", 200, 188)
 ]
 
-river_map = Map(river_map_tiles, 32, "maps/river_map.json", [])
+river_map = Map(overworld_tiles, 32, "maps/river_map.json", [])
 river_map.entities = [
     map_sprite("tree", 364, 616),
     map_sprite("tree", 480, 848),
@@ -72,29 +72,29 @@ river_map.entities = [
     map_sprite("well", 784, 432)
 ]
 
-houseSE_map = Map(river_map_tiles, 32, "maps/house_map.json", [])
+houseSE_map = Map(overworld_tiles, 32, "maps/house_map.json", [])
 houseSE_map.entities = [
     map_sprite("carpet", 288, 240),
     map_sprite("chair", 240, 240),
     map_sprite("purple npc", 424, 272)
 ]
 
-houseSW_map = Map(river_map_tiles, 32, "maps/house_map.json", [])
+houseSW_map = Map(overworld_tiles, 32, "maps/house_map.json", [])
 houseSW_map.entities = [
     map_sprite("carpet", 288, 240)
 ]
 
-houseNW_map = Map(river_map_tiles, 32, "maps/house_map.json", [])
+houseNW_map = Map(overworld_tiles, 32, "maps/house_map.json", [])
 houseNW_map.entities = [
     map_sprite("carpet", 288, 240)
 ]
 
-houseNE_map = Map(river_map_tiles, 32, "maps/house_map.json", [])
+houseNE_map = Map(overworld_tiles, 32, "maps/house_map.json", [])
 houseNE_map.entities = [
     map_sprite("carpet", 288, 240)
 ]
 
-patch_map = Map(river_map_tiles, 32, "maps/patch_map.json", [])
+patch_map = Map(overworld_tiles, 32, "maps/patch_map.json", [])
 patch_map.entities = [
     map_sprite("tree", 32, 1092),
     map_sprite("tree", -28, 1112),
@@ -102,23 +102,34 @@ patch_map.entities = [
     map_sprite("tree", 316, 1124),
     map_sprite("tree", 340, 280),
     map_sprite("tree", 948, 540),
-    map_sprite("tree", 1128, 868),
+    map_sprite("tree", 1128, 868)
 ]
 
-ruins_map = Map(river_map_tiles, 32, "maps/ruins_map.json", [])
+ruins_map = Map(overworld_tiles, 32, "maps/ruins_map.json", [])
 ruins_map.entities = [
     map_sprite("tree", 1336, 628),
     map_sprite("tree", 1112, 256),
-    map_sprite("tree", 292, 168),
-    map_sprite("tree", 180, 852)
+    map_sprite("tree", 500, 168),
+    map_sprite("tree", 180, 852),
+    map_sprite("tree", 306, 548),
+    map_sprite("tree", 884, 1016),
+    map_sprite("tree", 1448, 1340)
 ]
 
-west_beach_map = Map(river_map_tiles, 32, "maps/west_beach_map.json", [])
+west_beach_map = Map(overworld_tiles, 32, "maps/west_beach_map.json", [])
 west_beach_map.entities = [
     map_sprite("tree", 1144, 48)
 ]
 
-maps = [beach_map, river_map, houseSE_map, houseSW_map, houseNW_map, houseNE_map, patch_map, ruins_map, west_beach_map]
+castle_gate_map = Map(overworld_tiles, 32, "maps/castle_gate_map.json", [])
+castle_gate_map.entities = [
+    map_sprite("tree", 108, 1188),
+    map_sprite("tree", 452, 952),
+    map_sprite("tree", 820, 1366),
+    map_sprite("tree", 1348, 1300),
+]
+
+maps = [beach_map, river_map, houseSE_map, houseSW_map, houseNW_map, houseNE_map, patch_map, ruins_map, west_beach_map, castle_gate_map]
 worldmap = beach_map
 for i in maps:
     i.toggle_map(beach_map)

@@ -125,8 +125,44 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":292,
+                 "x":500,
                  "y":168
+                }, 
+                {
+                 "gid":14,
+                 "height":160,
+                 "id":13,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":128,
+                 "x":306,
+                 "y":548
+                }, 
+                {
+                 "gid":14,
+                 "height":160,
+                 "id":14,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":128,
+                 "x":884,
+                 "y":1016
+                }, 
+                {
+                 "gid":14,
+                 "height":160,
+                 "id":15,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":128,
+                 "x":1448,
+                 "y":1340
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -135,7 +171,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":13,
+ "nextobjectid":16,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",
@@ -143,7 +179,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"river_map.tsx"
+         "source":"overworld_tiles.tsx"
         }, 
         {
          "firstgid":12,
