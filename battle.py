@@ -22,7 +22,7 @@ class Battle:
         print("\nAESOR appears!")
         self.player = player
         self.enemy = enemy
-        self.enemy.x = self.player.x - 8
+        self.enemy.x = self.player.x
         self.enemy.y = self.player.y - 128
         self.enemy.get(Sprite).show = True
         physics.bodies.append(self.enemy.get(physics.Body))

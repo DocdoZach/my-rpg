@@ -108,16 +108,33 @@ class Player:
             elif self.current_hp + 15 > self.max_hp:
                 self.current_hp = self.max_hp
                 print(f"You are fully healed ({self.current_hp}/{self.max_hp} HP).")
+                self.inventory.remove(item)
                 return
             else:
                 self.current_hp += 15
                 print(f"Your HP is now {self.current_hp}/{self.max_hp}.")
+                self.inventory.remove(item)
+                return
+
+        elif item == acorn:
+            if self.current_hp == self.max_hp:
+                print(f"Your HP is already full ({self.current_hp}/{self.max_hp} HP)! Who eats acorns anyways?")
+                return
+            elif self.current_hp + 5 > self.max_hp:
+                self.current_hp = self.max_hp
+                print(f"You are fully healed ({self.current_hp}/{self.max_hp} HP). Weirdo.")
+                self.inventory.remove(item)
+                return
+            else:
+                self.current_hp += 5
+                print(f"Your HP is now {self.current_hp}/{self.max_hp}. Hope you're happy.")
+                self.inventory.remove(item)
                 return
 
     def open_inventory(self):
         print("\n----------\nDoc's Inventory:")
         for (i, item) in enumerate(self.inventory):
-            print(f"{i+1}. {item[0][0]} x{item[1]}")
+            print(f"{i+1}. {item[0]}")
         print("----------")
         try:
             selection = int(input("Select the number of the item to use: "))
@@ -129,7 +146,7 @@ class Player:
                 continue
             else:
                 break
-        self.use_item(self.inventory[selection-1][0])
+        self.use_item(self.inventory[selection-1])
 
     def open_stats(self):
         print("\n----------\nDoc's Stats:")

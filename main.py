@@ -4,7 +4,6 @@ Zach N
 '''
 
 import pygame
-
 import battle
 from sprite import loaded_images
 import keyinput
@@ -26,8 +25,23 @@ sprite_group = pygame.sprite.Group()
 # Game window
 screen = create_screen(800, 640, "THE HOLOGR△M")
 
+# Player
+doc = Entity(Player(1, [sword, potion]),
+             Sprite("media/sprites/player/doc.png"),
+             Body(12, 72, 24, 8),
+             x=480, y=768)
+
+# Boss
+aesor = Entity(Enemy(1),
+               Sprite("media/sprites/aesor.png"),
+               Body(12, 72, 24, 8),
+               x=0, y=0)
+aesor.get(Sprite).show = False
+physics.bodies.remove(aesor.get(Body))
+
 # Map exit checks
 def map_exits():
+    global spoke_to_resident, spoke_to_allium, spoke_to_friend
 
     # beach <-> river
     if maplist.worldmap == maplist.beach_map and doc.x in range(0, 1600+1, 4) and doc.y == -44:
@@ -45,11 +59,13 @@ def map_exits():
         maplist.switch_map(maplist.houseSE_map)
         doc.x = 376
         doc.y = 528
+        spoke_to_resident = False
     if maplist.worldmap == maplist.houseSE_map and doc.x in range(344, 408+1, 4) and doc.y == 560:
         print("House SE -> River")
         maplist.switch_map(maplist.river_map)
         doc.x = 1096
         doc.y = 864
+        spoke_to_resident = False
 
     # Enter/exit house SW
     if maplist.worldmap == maplist.river_map and doc.x in range(348, 372+1, 4) and doc.y == 440:
@@ -57,11 +73,13 @@ def map_exits():
         maplist.switch_map(maplist.houseSW_map)
         doc.x = 376
         doc.y = 528
+        spoke_to_allium = False
     if maplist.worldmap == maplist.houseSW_map and doc.x in range(344, 408+1, 4) and doc.y == 560:
         print("House SW -> River")
         maplist.switch_map(maplist.river_map)
         doc.x = 360
         doc.y = 448
+        spoke_to_allium = False
 
     # Enter/exit house NW
     if maplist.worldmap == maplist.river_map and doc.x in range(540, 564+1, 4) and doc.y == 200:
@@ -147,23 +165,100 @@ def map_exits():
         maplist.switch_map(maplist.ruins_map)
         doc.y = 0
 
+    # beach <-> east beach
+    if maplist.worldmap == maplist.beach_map and doc.x == 1564 and doc.y in range(0, 1600+1, 4):
+        print("Beach -> East Beach")
+        maplist.switch_map(maplist.east_beach_map)
+        doc.x = 0
+    if maplist.worldmap == maplist.east_beach_map and doc.x == -12 and doc.y in range(0, 1600+1, 4):
+        print("East Beach -> Beach")
+        maplist.switch_map(maplist.beach_map)
+        doc.x = 1520
+
+    # east beach <-> delta
+    if maplist.worldmap == maplist.east_beach_map and doc.x in range(0, 1600+1, 4) and doc.y == -44:
+        print("East Beach -> Delta")
+        maplist.switch_map(maplist.delta_map)
+        doc.y = 1520
+    if maplist.worldmap == maplist.delta_map and doc.x in range(0, 1600+1, 4) and doc.y == 1556:
+        print("Delta -> East Beach")
+        maplist.switch_map(maplist.east_beach_map)
+        doc.y = 0
+
+    # river <-> delta
+    if maplist.worldmap == maplist.river_map and doc.x == 1564 and doc.y in range(0, 1600 + 1, 4):
+        print("River -> Delta")
+        maplist.switch_map(maplist.delta_map)
+        doc.x = 0
+    if maplist.worldmap == maplist.delta_map and doc.x == -12 and doc.y in range(0, 1600 + 1, 4):
+        print("Delta -> River")
+        maplist.switch_map(maplist.river_map)
+        doc.x = 1520
+
+    # delta <-> lake
+    if maplist.worldmap == maplist.delta_map and doc.x in range(0, 1600+1, 4) and doc.y == -44:
+        print("Delta -> Lake")
+        maplist.switch_map(maplist.lake_map)
+        doc.y = 1520
+        spoke_to_friend = False
+    if maplist.worldmap == maplist.lake_map and doc.x in range(0, 1600+1, 4) and doc.y == 1556:
+        print("lake -> Delta")
+        maplist.switch_map(maplist.delta_map)
+        doc.y = 0
+        spoke_to_friend = False
+
+    # patch <-> lake
+    if maplist.worldmap == maplist.patch_map and doc.x == 1564 and doc.y in range(0, 1600 + 1, 4):
+        print("Patch -> Lake")
+        maplist.switch_map(maplist.lake_map)
+        doc.x = 0
+        spoke_to_friend = False
+    if maplist.worldmap == maplist.lake_map and doc.x == -12 and doc.y in range(0, 1600 + 1, 4):
+        print("Lake -> Patch")
+        maplist.switch_map(maplist.patch_map)
+        doc.x = 1520
+        spoke_to_friend = False
+
+spoke_to_resident = False
+spoke_to_allium = False
+spoke_to_friend = False
+
+# Object interaction checks
+def object_interactions():
+    global spoke_to_resident, spoke_to_allium, spoke_to_friend
+
+    # House SE chair
+    if maplist.worldmap == maplist.houseSE_map and doc.x in range(228, 244+1, 4) and doc.y == 232:
+        doc.get(Sprite).delete()
+        doc.get(Sprite).__init__("media/sprites/player/doc.png")
+
+    # House SE NPC
+    if not spoke_to_resident:
+        if maplist.worldmap == maplist.houseSE_map and doc.x in range(404, 444+1, 4) and doc.y == 280:
+            print("Resident: Hey Doc! Find anything cool lately?")
+            spoke_to_resident = True
+
+    # House SW chair
+    if maplist.worldmap == maplist.houseSW_map and doc.x in range(588, 604+1, 4) and doc.y == 192:
+        doc.get(Sprite).delete()
+        doc.get(Sprite).__init__("media/sprites/player/doc.png")
+
+    # House SW Allium
+    if not spoke_to_allium:
+        if maplist.worldmap == maplist.houseSW_map and doc.x in range(380, 420+1, 4) and doc.y == 328:
+            print("ALLIUM: Hello, Doc. I'm looking after a friend's place. He's near the lake if you're looking for him.")
+            spoke_to_allium = True
+
+    # Lake friend
+    if not spoke_to_friend:
+        if maplist.worldmap == maplist.lake_map and doc.x == 556 and doc.y == 1220:
+            print("ALLIUM's Friend: Psst, buddy, over here. I'm the tree. Here's an acorn!")
+            doc.get(Player).inventory.append(acorn)
+            spoke_to_friend = True
+
 # Audio
 song = pygame.mixer.Sound("media/audio/music/hologram.mp3")
 pygame.mixer.Sound.set_volume(song, 0.5)
-
-# Player
-doc = Entity(Player(1, [[sword, 1], [potion, 2]]),
-             Sprite("media/sprites/player/doc.png"),
-             Body(12, 72, 24, 8),
-             x=480, y=768)
-
-# Boss
-aesor = Entity(Enemy(1),
-               Sprite("media/sprites/aesor.png"),
-               Body(0, 0, 64, 96),
-               x=0, y=0)
-aesor.get(Sprite).show = False
-physics.bodies.remove(aesor.get(Body))
 
 # Game clock
 clock = pygame.time.Clock()
@@ -241,10 +336,8 @@ while is_running:
     # Check for map exits
     map_exits()
 
-    # Check for object interaction
-    if maplist.worldmap == maplist.houseSE_map and doc.x in range(228, 244+1, 4) and doc.y == 232:
-        doc.get(Sprite).delete()
-        doc.get(Sprite).__init__("media/sprites/player/doc.png")
+    # Check for object interactions
+    object_interactions()
 
     # Draw sprites
     screen.fill((16, 16, 16))

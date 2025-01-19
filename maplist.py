@@ -19,6 +19,8 @@ def map_sprite(kind, x, y):
         return Entity(Sprite("media/sprites/chair.png", True), Body(0, 0, 40, 64), x=x, y=y)
     if kind == "purple npc":
         return Entity(Sprite("media/sprites/npc_purple.png", False), Body(12, 72, 24, 8), x=x, y=y)
+    if kind == "allium":
+        return Entity(Sprite("media/sprites/allium.png", False), Body(12, 72, 24, 8), x=x, y=y)
 
 def switch_map(new_map):
     global worldmap
@@ -38,7 +40,8 @@ overworld_tiles = [
     TileType("sand", False, "media/sprites/tiles/sand_tile.png"),
     TileType("planks", False, "media/sprites/tiles/planks_tile.png"),
     TileType("stone", False, "media/sprites/tiles/stone_tile.png"),
-    TileType("stone_brick", True, "media/sprites/tiles/stone_brick_tile.png")
+    TileType("stone_brick", True, "media/sprites/tiles/stone_brick_tile.png"),
+    TileType("red_brick", True, "media/sprites/tiles/red_brick_tile.png")
 ]
 house_map_tiles = [
     None,
@@ -81,7 +84,9 @@ houseSE_map.entities = [
 
 houseSW_map = Map(overworld_tiles, 32, "maps/house_map.json", [])
 houseSW_map.entities = [
-    map_sprite("carpet", 288, 240)
+    map_sprite("carpet", 288, 240),
+    map_sprite("chair", 600, 200),
+    map_sprite("allium", 400, 320)
 ]
 
 houseNW_map = Map(overworld_tiles, 32, "maps/house_map.json", [])
@@ -127,6 +132,17 @@ castle_gate_map.entities = [
     map_sprite("tree", 452, 952),
     map_sprite("tree", 820, 1366),
     map_sprite("tree", 1348, 1300),
+]
+
+east_beach_map = Map(overworld_tiles, 32, "maps/east_beach_map.json", [])
+east_beach_map.entities = []
+
+delta_map = Map(overworld_tiles, 32, "maps/delta_map.json", [])
+delta_map.entities = []
+
+lake_map = Map(overworld_tiles, 32, "maps/lake_map.json", [])
+lake_map.entities = [
+    map_sprite("tree", 516, 1132)
 ]
 
 maps = [beach_map, river_map, houseSE_map, houseSW_map, houseNW_map, houseNE_map, patch_map, ruins_map, west_beach_map, castle_gate_map]

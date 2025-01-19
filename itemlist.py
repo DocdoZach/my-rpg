@@ -2,3 +2,4 @@
 
 sword = ("Sword", 10) #name, attack
 potion = ("Potion", 15) #name, heal
+acorn = ("Acorn", 5) #name, heal
