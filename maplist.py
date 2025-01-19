@@ -102,7 +102,6 @@ houseNE_map.entities = [
 patch_map = Map(overworld_tiles, 32, "maps/patch_map.json", [])
 patch_map.entities = [
     map_sprite("tree", 32, 1092),
-    map_sprite("tree", -28, 1112),
     map_sprite("tree", 112, 628),
     map_sprite("tree", 316, 1124),
     map_sprite("tree", 340, 280),
@@ -145,7 +144,7 @@ lake_map.entities = [
     map_sprite("tree", 516, 1132)
 ]
 
-maps = [beach_map, river_map, houseSE_map, houseSW_map, houseNW_map, houseNE_map, patch_map, ruins_map, west_beach_map, castle_gate_map]
+maps = [beach_map, river_map, houseSE_map, houseSW_map, houseNW_map, houseNE_map, patch_map, ruins_map, west_beach_map, castle_gate_map, east_beach_map, delta_map, lake_map]
 worldmap = beach_map
 for i in maps:
     i.toggle_map(beach_map)

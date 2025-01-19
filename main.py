@@ -60,7 +60,7 @@ def map_exits():
         doc.x = 376
         doc.y = 528
         spoke_to_resident = False
-    if maplist.worldmap == maplist.houseSE_map and doc.x in range(344, 408+1, 4) and doc.y == 560:
+    if maplist.worldmap == maplist.houseSE_map and doc.x in range(340, 412+1, 4) and doc.y == 560:
         print("House SE -> River")
         maplist.switch_map(maplist.river_map)
         doc.x = 1096
@@ -74,7 +74,7 @@ def map_exits():
         doc.x = 376
         doc.y = 528
         spoke_to_allium = False
-    if maplist.worldmap == maplist.houseSW_map and doc.x in range(344, 408+1, 4) and doc.y == 560:
+    if maplist.worldmap == maplist.houseSW_map and doc.x in range(340, 412+1, 4) and doc.y == 560:
         print("House SW -> River")
         maplist.switch_map(maplist.river_map)
         doc.x = 360
@@ -87,7 +87,7 @@ def map_exits():
         maplist.switch_map(maplist.houseNW_map)
         doc.x = 376
         doc.y = 528
-    if maplist.worldmap == maplist.houseNW_map and doc.x in range(344, 408+1, 4) and doc.y == 560:
+    if maplist.worldmap == maplist.houseNW_map and doc.x in range(340, 412+1, 4) and doc.y == 560:
         print("House NW -> River")
         maplist.switch_map(maplist.river_map)
         doc.x = 552
@@ -99,7 +99,7 @@ def map_exits():
         maplist.switch_map(maplist.houseNE_map)
         doc.x = 376
         doc.y = 528
-    if maplist.worldmap == maplist.houseNE_map and doc.x in range(344, 408+1, 4) and doc.y == 560:
+    if maplist.worldmap == maplist.houseNE_map and doc.x in range(340, 412+1, 4) and doc.y == 560:
         print("House NE -> River")
         maplist.switch_map(maplist.river_map)
         doc.x = 1416
