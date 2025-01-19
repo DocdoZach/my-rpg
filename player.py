@@ -19,7 +19,6 @@ class Player:
         self.inventory = inventory
         self.max_hp = 10 + self.level * 5
         self.current_hp = self.max_hp
-        self.prev_key = ""
 
     def update(self):
         previous_x = self.entity.x

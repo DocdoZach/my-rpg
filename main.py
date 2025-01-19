@@ -119,7 +119,7 @@ def map_exits():
     if maplist.worldmap == maplist.river_map and doc.x == -12 and doc.y in range(0, 1600+1, 4):
         print("River -> Ruins")
         maplist.switch_map(maplist.ruins_map)
-        doc.x = 1520
+        doc.x = 1552
     if maplist.worldmap == maplist.ruins_map and doc.x == 1564 and doc.y in range(0, 1600+1, 4):
         print("Ruins -> River")
         maplist.switch_map(maplist.river_map)
@@ -129,7 +129,7 @@ def map_exits():
     if maplist.worldmap == maplist.beach_map and doc.x == -12 and doc.y in range(0, 1600+1, 4):
         print("Beach -> West Beach")
         maplist.switch_map(maplist.west_beach_map)
-        doc.x = 1520
+        doc.x = 1552
     if maplist.worldmap == maplist.west_beach_map and doc.x == 1564 and doc.y in range(0, 1600+1, 4):
         print("West Beach -> Beach")
         maplist.switch_map(maplist.beach_map)
@@ -149,7 +149,7 @@ def map_exits():
     if maplist.worldmap == maplist.patch_map and doc.x == -12 and doc.y in range(0, 1600+1, 4):
         print("Patch -> Castle Gate")
         maplist.switch_map(maplist.castle_gate_map)
-        doc.x = 1520
+        doc.x = 1552
     if maplist.worldmap == maplist.castle_gate_map and doc.x == 1564 and doc.y in range(0, 1600+1, 4):
         print("Castle Gate -> Patch")
         maplist.switch_map(maplist.patch_map)
@@ -173,7 +173,7 @@ def map_exits():
     if maplist.worldmap == maplist.east_beach_map and doc.x == -12 and doc.y in range(0, 1600+1, 4):
         print("East Beach -> Beach")
         maplist.switch_map(maplist.beach_map)
-        doc.x = 1520
+        doc.x = 1552
 
     # east beach <-> delta
     if maplist.worldmap == maplist.east_beach_map and doc.x in range(0, 1600+1, 4) and doc.y == -44:
@@ -193,7 +193,7 @@ def map_exits():
     if maplist.worldmap == maplist.delta_map and doc.x == -12 and doc.y in range(0, 1600 + 1, 4):
         print("Delta -> River")
         maplist.switch_map(maplist.river_map)
-        doc.x = 1520
+        doc.x = 1552
 
     # delta <-> lake
     if maplist.worldmap == maplist.delta_map and doc.x in range(0, 1600+1, 4) and doc.y == -44:
@@ -216,7 +216,7 @@ def map_exits():
     if maplist.worldmap == maplist.lake_map and doc.x == -12 and doc.y in range(0, 1600 + 1, 4):
         print("Lake -> Patch")
         maplist.switch_map(maplist.patch_map)
-        doc.x = 1520
+        doc.x = 1552
         spoke_to_friend = False
 
 spoke_to_resident = False
@@ -322,9 +322,6 @@ while is_running:
                 if event.key == pygame.K_m:
                     pygame.mixer.stop()
 
-                if event.key == pygame.K_t:
-                    print(sprites)
-
         elif event.type == pygame.KEYUP:
             keyinput.keys_down.remove(event.key)
 
@@ -354,5 +351,9 @@ while is_running:
     # Battle mode
     if battle.in_battle:
         battle.current_battle.your_turn()
+        battle.current_battle.check_end()
+    if battle.in_battle:
+        battle.current_battle.use_stare()
+        battle.current_battle.check_end()
 
 pygame.quit()

@@ -6,6 +6,7 @@ import physics
 from player import Player
 from entity import Enemy
 from itemlist import *
+from movelist import *
 from sprite import Sprite
 
 in_battle = False
@@ -29,35 +30,52 @@ class Battle:
 
     def your_turn(self):
         global in_battle
-        print("\n----------\n1. Fight\n2. Use item\n3. Flee battle\n----------")
-        try:
-            decision = int(input("What will you do? Select a number (1-3): "))
-            match decision:
-                case 1:
-                    self.player.get(Player).use_item(sword)
-                case 2:
-                    self.player.get(Player).open_inventory()
-                case 3:
-                    in_battle = False
-                    self.enemy.get(Sprite).show = False
-                    physics.bodies.remove(self.enemy.get(physics.Body))
-                    print("\nYou fled the battle.")
-                    pygame.mixer.stop()
-        except ValueError:
-            int(input("Invalid option. Select a number (1-3): "))
-        if self.player.get(Player).current_hp <= 0:
-            self.end(False)
-        elif self.enemy.get(Enemy).current_hp <= 0:
-            self.end(True)
+        print("\n----------\n1. Fight\n2. Use item\n3. Check stats\n4. Flee battle\n----------")
+        while True:
+            try:
+                decision = int(input("What will you do? Select a number (1-4): "))
+                match decision:
+                    case 0:
+                        break
+                    case 1:
+                        self.player.get(Player).use_item(sword)
+                        break
+                    case 2:
+                        self.player.get(Player).open_inventory()
+                        break
+                    case 3:
+                        self.player.get(Player).open_stats()
+                    case 4:
+                        in_battle = False
+                        self.enemy.get(Sprite).show = False
+                        physics.bodies.remove(self.enemy.get(physics.Body))
+                        print("\nYou fled the battle.")
+                        pygame.mixer.stop()
+                        break
+                    case _:
+                        print("Invalid option.")
+            except ValueError:
+                print("Invalid option.")
 
     def use_sword(self):
         self.enemy.get(Enemy).current_hp -= sword[1]
         print(f"\nDoc used Slash... AESOR took {sword[1]} damage!")
 
+    def use_stare(self):
+        self.player.get(Player).current_hp -= stare[1]
+        print(f"\nAESOR used Stare.. Doc took {stare[1]} damage!")
+
+    def check_end(self):
+        if self.player.get(Player).current_hp <= 0:
+            self.end(False)
+        elif self.enemy.get(Enemy).current_hp <= 0:
+            self.end(True)
+
     def end(self, player_win):
         global in_battle
         self.enemy.get(Sprite).show = False
         physics.bodies.remove(self.enemy.get(physics.Body))
+        self.player.get(Player).current_hp = self.player.get(Player).max_hp
         self.enemy.get(Enemy).current_hp = self.enemy.get(Enemy).max_hp
         if player_win:
             self.player.get(Player).level += 1
