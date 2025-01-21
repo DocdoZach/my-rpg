@@ -14,7 +14,7 @@ import maplist
 class Player:
     def __init__(self, level, inventory):
         active_objects.append(self)
-        self.move_speed = 8
+        self.move_speed = 4
         self.level = level
         self.inventory = inventory
         self.max_hp = 10 + self.level * 5
@@ -32,10 +32,10 @@ class Player:
 
         # Player's movement
 
-        if is_key_pressed(pygame.K_LCTRL):
-            self.move_speed = 8
-        else:
-            self.move_speed = 4
+        #if is_key_pressed(pygame.K_LCTRL):
+        #    self.move_speed = 8
+        #else:
+        #    self.move_speed = 4
 
         if is_key_pressed(pygame.K_w) or is_key_pressed(pygame.K_UP):
             if self.entity.y > -44:

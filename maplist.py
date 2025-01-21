@@ -134,14 +134,28 @@ castle_gate_map.entities = [
 ]
 
 east_beach_map = Map(overworld_tiles, 32, "maps/east_beach_map.json", [])
-east_beach_map.entities = []
+east_beach_map.entities = [
+    map_sprite("tree", 132, 176),
+    map_sprite("tree", 1296, 308),
+    map_sprite("tree", 448, 588)
+]
 
 delta_map = Map(overworld_tiles, 32, "maps/delta_map.json", [])
-delta_map.entities = []
+delta_map.entities = [
+    map_sprite("tree", 788, 192),
+    map_sprite("tree", 1304, 596),
+    map_sprite("tree", 236, 684),
+    map_sprite("tree", 632, 988),
+    map_sprite("tree", 1120, 1196)
+]
 
 lake_map = Map(overworld_tiles, 32, "maps/lake_map.json", [])
 lake_map.entities = [
-    map_sprite("tree", 516, 1132)
+    map_sprite("tree", 516, 1132),
+    map_sprite("tree", 1244, 128),
+    map_sprite("tree", 748, 236),
+    map_sprite("tree", 144, 136),
+    map_sprite("tree", 116, 988)
 ]
 
 maps = [beach_map, river_map, houseSE_map, houseSW_map, houseNW_map, houseNE_map, patch_map, ruins_map, west_beach_map, castle_gate_map, east_beach_map, delta_map, lake_map]

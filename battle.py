@@ -49,6 +49,7 @@ class Battle:
                         in_battle = False
                         self.enemy.get(Sprite).show = False
                         physics.bodies.remove(self.enemy.get(physics.Body))
+                        self.enemy.get(Enemy).current_hp = self.enemy.get(Enemy).max_hp
                         print("\nYou fled the battle.")
                         pygame.mixer.stop()
                         break

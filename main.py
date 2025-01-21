@@ -278,6 +278,10 @@ while is_running:
             keyinput.keys_down.add(event.key)
             if not battle.in_battle:
 
+                # Exit game
+                if event.key == pygame.K_ESCAPE:
+                    is_running = False
+
                 # Open inventory
                 if event.key == pygame.K_z:
                     doc.get(Player).open_inventory()
@@ -321,6 +325,10 @@ while is_running:
                 # Toggle off music
                 if event.key == pygame.K_m:
                     pygame.mixer.stop()
+
+                # Change move speed
+                if event.key == pygame.K_y:
+                    doc.get(Player).move_speed = float(input("What is the new move speed?: "))
 
         elif event.type == pygame.KEYUP:
             keyinput.keys_down.remove(event.key)
