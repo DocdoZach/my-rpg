@@ -1,7 +1,7 @@
-'''
+"""
 The Hologram - An RPG made for CS class
 Zach N
-'''
+"""
 
 import pygame
 import battle
@@ -218,6 +218,38 @@ def map_exits():
         maplist.switch_map(maplist.patch_map)
         doc.x = 1552
         spoke_to_friend = False
+
+    # east beach <-> easter beach
+    if maplist.worldmap == maplist.east_beach_map and doc.x == 1564 and doc.y in range(0, 1600 + 1, 4):
+        print("East Beach -> Easter Beach")
+        maplist.switch_map(maplist.easter_beach_map)
+        doc.x = 0
+    if maplist.worldmap == maplist.easter_beach_map and doc.x == -12 and doc.y in range(0, 1600 + 1, 4):
+        print("Easter Beach -> East Beach")
+        maplist.switch_map(maplist.east_beach_map)
+        doc.x = 1552
+
+    # easter beach <-> tower
+    if maplist.worldmap == maplist.easter_beach_map and doc.x in range(0, 1600+1, 4) and doc.y == -44:
+        print("Easter Beach -> Tower")
+        maplist.switch_map(maplist.tower_map)
+        doc.y = 1520
+        spoke_to_friend = False
+    if maplist.worldmap == maplist.tower_map and doc.x in range(0, 1600+1, 4) and doc.y == 1556:
+        print("Tower -> Easter Beach")
+        maplist.switch_map(maplist.easter_beach_map)
+        doc.y = 0
+        spoke_to_friend = False
+
+    # delta <-> tower
+    if maplist.worldmap == maplist.delta_map and doc.x == 1564 and doc.y in range(0, 1600 + 1, 4):
+        print("Delta -> Tower")
+        maplist.switch_map(maplist.tower_map)
+        doc.x = 0
+    if maplist.worldmap == maplist.tower_map and doc.x == -12 and doc.y in range(0, 1600 + 1, 4):
+        print("Tower -> Delta")
+        maplist.switch_map(maplist.delta_map)
+        doc.x = 1552
 
 spoke_to_resident = False
 spoke_to_allium = False

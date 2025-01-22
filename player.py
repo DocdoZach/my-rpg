@@ -32,10 +32,10 @@ class Player:
 
         # Player's movement
 
-        #if is_key_pressed(pygame.K_LCTRL):
-        #    self.move_speed = 8
-        #else:
-        #    self.move_speed = 4
+        if is_key_pressed(pygame.K_LCTRL):
+            self.move_speed = 8
+        else:
+            self.move_speed = 4
 
         if is_key_pressed(pygame.K_w) or is_key_pressed(pygame.K_UP):
             if self.entity.y > -44:
