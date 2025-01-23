@@ -288,12 +288,19 @@ def object_interactions():
             doc.get(Player).inventory.append(acorn)
             spoke_to_friend = True
 
+# Display controls
+def open_controls():
+    print("THE HOLOGRAM - Made by Zach N\n----------\nWASD/Arrow Keys: move around\nCTRL: speed up\nE: print player's coordinates\nZ: open inventory\nX: open player's stats\nC: open controls\nB: start battle\nP: lose 3 HP\n[/]: level down/level up, respectively\nN/M: play/stop music, respectively\n----------")
+
 # Audio
 song = pygame.mixer.Sound("media/audio/music/hologram.mp3")
 pygame.mixer.Sound.set_volume(song, 0.5)
 
 # Game clock
 clock = pygame.time.Clock()
+
+# Introduction
+open_controls()
 
 # Game loop
 is_running = True
@@ -321,6 +328,10 @@ while is_running:
                 # Open stats
                 if event.key == pygame.K_x:
                     doc.get(Player).open_stats()
+
+                # Open controls
+                if event.key == pygame.K_c:
+                    open_controls()
 
                 # Debug testing:
 
