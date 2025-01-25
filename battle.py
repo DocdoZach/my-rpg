@@ -13,11 +13,11 @@ in_battle = False
 current_battle = None
 
 class Battle:
-    def __init__(self, player, enemy, song):
-        self.song = song
-        if self.song is not None:
-            pygame.mixer.stop()
-            pygame.mixer.Sound(self.song)
+    def __init__(self, player, enemy):
+        #self.song = song
+        #if self.song is not None:
+        #    pygame.mixer.stop()
+        #    pygame.mixer.Sound(self.song)
         global in_battle
         in_battle = True
         print("\nAESOR appears!")

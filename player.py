@@ -135,16 +135,16 @@ class Player:
         for (i, item) in enumerate(self.inventory):
             print(f"{i+1}. {item[0]}")
         print("----------")
-        try:
-            selection = int(input("Select the number of the item to use: "))
-        except ValueError:
-            selection = int(input("Invalid option. Select the number of the item to use: "))
         while True:
-            if selection <= 0 or selection > len(self.inventory):
-                selection = int(input("Invalid option. Select the number of the item to use: "))
-                continue
-            else:
-                break
+            try:
+                selection = int(input("Select the number of the item to use: "))
+                if selection <= 0 or selection > len(self.inventory):
+                    print("Invalid option.")
+                    continue
+                else:
+                    break
+            except ValueError:
+                print("Invalid option.")
         self.use_item(self.inventory[selection-1])
 
     def open_stats(self):

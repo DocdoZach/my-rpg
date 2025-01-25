@@ -290,11 +290,12 @@ def object_interactions():
 
 # Display controls
 def open_controls():
-    print("THE HOLOGRAM - Made by Zach N\n----------\nWASD/Arrow Keys: move around\nCTRL: speed up\nE: print player's coordinates\nZ: open inventory\nX: open player's stats\nC: open controls\nB: start battle\nP: lose 3 HP\n[/]: level down/level up, respectively\nN/M: play/stop music, respectively\n----------")
+    print("THE HOLOGRAM - Made by Zach N\n----------\nWASD/Arrow Keys: move around\nCTRL: speed up\nE: print player's coordinates\nZ: open inventory\nX: open player's stats\nC: open controls\nB: start battle\nP: lose 3 HP\n[ ]: level down/level up, respectively\n----------")
 
 # Audio
-song = pygame.mixer.Sound("media/audio/music/hologram.mp3")
-pygame.mixer.Sound.set_volume(song, 0.5)
+pygame.mixer.music.load("media/audio/music/GrassLoop.ogg")
+pygame.mixer.music.set_volume(0.2)
+pygame.mixer.music.play(-1)
 
 # Game clock
 clock = pygame.time.Clock()
@@ -337,7 +338,7 @@ while is_running:
 
                 # Create Battle object
                 if event.key == pygame.K_b:
-                    battle.current_battle = Battle(doc, aesor, song)
+                    battle.current_battle = Battle(doc, aesor)
                     doc.get(Sprite).delete()
                     doc.get(Sprite).__init__("media/sprites/player/doc_back.png")
 
@@ -362,16 +363,12 @@ while is_running:
                     print("Lost 3 HP")
 
                 # Toggle on music
-                if event.key == pygame.K_n:
-                    pygame.mixer.Sound.play(song)
+                #if event.key == pygame.K_n:
+                #    pygame.mixer.Sound.play(song)
 
                 # Toggle off music
-                if event.key == pygame.K_m:
-                    pygame.mixer.stop()
-
-                # Change move speed
-                if event.key == pygame.K_y:
-                    doc.get(Player).move_speed = float(input("What is the new move speed?: "))
+                #if event.key == pygame.K_m:
+                #    pygame.mixer.stop()
 
         elif event.type == pygame.KEYUP:
             keyinput.keys_down.remove(event.key)
