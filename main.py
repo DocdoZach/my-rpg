@@ -290,11 +290,11 @@ def object_interactions():
 
 # Display controls
 def open_controls():
-    print("THE HOLOGRAM - Made by Zach N\n----------\nWASD/Arrow Keys: move around\nCTRL: speed up\nE: print player's coordinates\nZ: open inventory\nX: open player's stats\nC: open controls\nB: start battle\nP: lose 3 HP\n[ ]: level down/level up, respectively\n----------")
+    print("THE HOLOGRAM - Made by Zach N\n----------\nWASD/Arrow Keys: move around\nCTRL: speed up\nE: print player's coordinates\nZ: open inventory\nX: open player's stats\nC: open controls\nM: toggle music\n, .: lower/raise volume, respectively\nB: start battle\nP: lose 3 HP\n[ ]: level down/level up, respectively\n----------")
 
 # Audio
 pygame.mixer.music.load("media/audio/music/GrassLoop.ogg")
-pygame.mixer.music.set_volume(0.2)
+vol = 0.2
 pygame.mixer.music.play(-1)
 
 # Game clock
@@ -309,6 +309,9 @@ while is_running:
 
     # Game clock frequency (60Hz)
     clock.tick(60)
+
+    # Set volume
+    pygame.mixer.music.set_volume(vol)
 
     # Event handler (quit game, keys pressed)
     for event in pygame.event.get():
@@ -333,6 +336,23 @@ while is_running:
                 # Open controls
                 if event.key == pygame.K_c:
                     open_controls()
+
+                # Toggle music
+                if event.key == pygame.K_m:
+                    if pygame.mixer.music.get_busy():
+                        pygame.mixer.music.pause()
+                    else:
+                        pygame.mixer.music.unpause()
+
+                # Lower/raise volume
+                if event.key == pygame.K_COMMA:
+                    if 1.0 >= vol > 0.1:
+                        vol -= 0.1
+                        print(f"Volume: {vol * 100:0.0f}%")
+                if event.key == pygame.K_PERIOD:
+                    if 0.9 > vol >= 0.0:
+                        vol += 0.1
+                        print(f"Volume: {vol * 100:0.0f}%")
 
                 # Debug testing:
 
@@ -361,14 +381,6 @@ while is_running:
                 if event.key == pygame.K_p:
                     doc.get(Player).current_hp -= 3
                     print("Lost 3 HP")
-
-                # Toggle on music
-                #if event.key == pygame.K_n:
-                #    pygame.mixer.Sound.play(song)
-
-                # Toggle off music
-                #if event.key == pygame.K_m:
-                #    pygame.mixer.stop()
 
         elif event.type == pygame.KEYUP:
             keyinput.keys_down.remove(event.key)
