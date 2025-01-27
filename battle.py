@@ -15,10 +15,6 @@ current_battle = None
 
 class Battle:
     def __init__(self, player, enemy):
-        #self.song = song
-        #if self.song is not None:
-        #    pygame.mixer.stop()
-        #    pygame.mixer.Sound(self.song)
         global in_battle
         in_battle = True
         print("\nAESOR appears!")
@@ -55,7 +51,6 @@ class Battle:
                         physics.bodies.remove(self.enemy.get(physics.Body))
                         self.enemy.get(Enemy).current_hp = self.enemy.get(Enemy).max_hp
                         print("\nYou fled the battle.")
-                        pygame.mixer.stop()
                         break
                     case _:
                         print("Invalid option.")
@@ -89,4 +84,3 @@ class Battle:
         else:
             print("\nYou lost the battle...")
             in_battle = False
-        pygame.mixer.stop()
