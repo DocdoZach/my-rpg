@@ -1,6 +1,7 @@
 # This file contains the Battle class. It is used to start and control a battle between the player and an enemy.
 
 import pygame
+import random
 
 import physics
 from player import Player
@@ -30,6 +31,9 @@ class Battle:
 
     def your_turn(self):
         global in_battle
+        dialogs = ["AESOR gazes at you coldly.", "What an eyesore!", "AESOR won’t look away.", "You feel like you’re being watched."]
+        rand_dialog = dialogs[random.randrange(len(dialogs))]
+        print(f"\n{rand_dialog}")
         print("\n----------\n1. Fight\n2. Use item\n3. Check stats\n4. Flee battle\n----------")
         while True:
             try:
