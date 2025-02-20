@@ -203,7 +203,7 @@ def map_exits():
         doc.y = 1520
         spoke_to_friend = False
     if maplist.worldmap == maplist.lake_map and doc.x in range(0, 1600+1, 4) and doc.y == 1556:
-        print("lake -> Delta")
+        print("Lake -> Delta")
         maplist.switch_map(maplist.delta_map)
         doc.y = 0
         spoke_to_friend = False
