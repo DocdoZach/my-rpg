@@ -2,7 +2,7 @@
 
 import pygame
 import random
-
+import os
 import physics
 from player import Player
 from entity import Enemy
@@ -17,6 +17,7 @@ class Battle:
     def __init__(self, player, enemy):
         global in_battle
         in_battle = True
+        os.system('cls' if os.name == 'nt' else 'clear')
         print("\nAESOR appears!")
         self.player = player
         self.enemy = enemy
@@ -51,11 +52,12 @@ class Battle:
                         physics.bodies.remove(self.enemy.get(physics.Body))
                         self.enemy.get(Enemy).current_hp = self.enemy.get(Enemy).max_hp
                         print("\nYou fled the battle.")
-                        break
+                        return
                     case _:
                         print("Invalid option.")
             except ValueError:
                 print("Invalid option.")
+        os.system('cls' if os.name == 'nt' else 'clear')
 
     def use_sword(self):
         self.enemy.get(Enemy).current_hp -= sword[1]

@@ -4,6 +4,7 @@ Zach N
 """
 
 import pygame
+import os
 import battle
 from sprite import loaded_images
 import keyinput
@@ -267,6 +268,7 @@ def object_interactions():
     # House SE NPC
     if not spoke_to_resident:
         if maplist.worldmap == maplist.houseSE_map and doc.x in range(404, 444+1, 4) and doc.y == 280:
+            os.system('cls' if os.name == 'nt' else 'clear')
             print("Resident: Hey Doc! Find anything cool lately?")
             spoke_to_resident = True
 
@@ -278,19 +280,22 @@ def object_interactions():
     # House SW Allium
     if not spoke_to_allium:
         if maplist.worldmap == maplist.houseSW_map and doc.x in range(380, 420+1, 4) and doc.y == 328:
+            os.system('cls' if os.name == 'nt' else 'clear')
             print("ALLIUM: Hello, Doc. I'm looking after a friend's place. He's near the lake if you're looking for him.")
             spoke_to_allium = True
 
     # Lake friend
     if not spoke_to_friend:
         if maplist.worldmap == maplist.lake_map and doc.x == 556 and doc.y == 1220:
+            os.system('cls' if os.name == 'nt' else 'clear')
             print("ALLIUM's Friend: Psst, buddy, over here. I'm the tree. Here's an acorn!")
             doc.get(Player).inventory.append(acorn)
             spoke_to_friend = True
 
 # Display controls
 def open_controls():
-    print("THE HOLOGRAM - Made by Zach N\n----------\nWASD/Arrow Keys: move around\nCTRL: speed up\nE: print player's coordinates\nZ: open inventory\nX: open player's stats\nC: open controls\nM: toggle music\n, .: lower/raise volume, respectively\nB: start battle\nP: lose 3 HP\n[ ]: level down/level up, respectively\n----------")
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("THE HOLOGRAM - Made by Zach N\n----------\nWASD/Arrow Keys: move around\nCTRL: speed up\nE: print player's coordinates\nZ: open inventory\nX: open player's stats\nC: open controls\nM: toggle music\n, .: lower/raise volume, respectively\nB: start battle\nU: clear terminal\nP: lose 3 HP\n[ ]: level down/level up, respectively\n----------")
 
 # Audio
 pygame.mixer.music.load("media/audio/music/GrassLoop.ogg")
@@ -355,6 +360,10 @@ while is_running:
                         print(f"Volume: {vol * 100:0.0f}%")
 
                 # Debug testing:
+
+                # Clear terminal
+                if event.key == pygame.K_u:
+                    os.system('cls' if os.name == 'nt' else 'clear')
 
                 # Create Battle object
                 if event.key == pygame.K_b:

@@ -1,7 +1,7 @@
 # This file contains the Player class. It is used as a component of an Entity object representing the player character. Movement, body and camera are set here.
 
 import pygame
-
+import os
 import battle
 from itemlist import *
 from sprite import Sprite
@@ -131,6 +131,7 @@ class Player:
                 return
 
     def open_inventory(self):
+        os.system('cls' if os.name == 'nt' else 'clear')
         print("\n----------\nDoc's Inventory:")
         for (i, item) in enumerate(self.inventory):
             print(f"{i+1}. {item[0]}")
@@ -148,6 +149,7 @@ class Player:
         self.use_item(self.inventory[selection-1])
 
     def open_stats(self):
+        os.system('cls' if os.name == 'nt' else 'clear')
         print("\n----------\nDoc's Stats:")
         print(f"Level {self.level}\n{self.current_hp}/{self.max_hp} HP")
         print("----------")
